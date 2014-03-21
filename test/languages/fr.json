@@ -1,0 +1,10 @@
+[{
+    "TEXT": "Selectionnez un nombre de message : ",
+	"NB_MSG": "Vous avez %d message%p",
+	"EMPTY": "Vous n'avez aucun message !"
+},
+{
+    "plurial": {
+		"p": ["s"]
+	}
+}]
