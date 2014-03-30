@@ -39,11 +39,13 @@ var Languages = {
 	init: function(id, path, callback) {
 	
 		if (!id) {
-			id = navigator.language || navigator.userLanguage; 
+			id = (	navigator.language || 
+					navigator.userLanguage || 
+					this.current
+				 ).replace(/\-.+/, ""); 
 		}
 		
-		var _path = path + id + ".json";
-		var xhr, self = this; 
+		var _path, xhr, self = this; 
 		
 		this.current = id;
 		
@@ -53,6 +55,8 @@ var Languages = {
 		}
 		
 		if (!path) path = "./languages/";
+		
+		_path =  path + id + ".json";
 	
 		function _callback(txt) {
 			var json = JSON.parse(txt);
@@ -79,6 +83,7 @@ var Languages = {
 		}
 
 		xhr.onreadystatechange  = function() {
+			
 			 if (xhr.readyState  == 4)  {
 				 if (xhr.status  == 200) {
 					 _callback(xhr.responseText);
@@ -160,6 +165,7 @@ String.prototype.t = function(arg) {
 	}	
 	return str;
 }
+
 
 if (fs) {
 	exports.Languages = Languages;

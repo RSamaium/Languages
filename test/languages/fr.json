@@ -1,10 +1,12 @@
 [{
     "TEXT": "Selectionnez un nombre de message : ",
 	"NB_MSG": "Vous avez %d message%p",
-	"EMPTY": "Vous n'avez aucun message !"
+	"EMPTY": "Vous n'avez aucun message !",
+	"HORSE": "%d cheva%p1"
 },
 {
     "plurial": {
-		"p": ["s"]
-	}
+		"p": ["s"],
+		"p1": ["ux", "l"]
+	 }
 }]

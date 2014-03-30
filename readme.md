@@ -1,10 +1,16 @@
-# Languages.js
+# Languages [.js ; .php]
 
-Version 0.8.0
+Version 0.8.1
 
 ## Description
 
 Management phrases in several languages
+
+## Works with
+
+* Javascript
+* Node.js
+* PHP (>=5.3)
 
 ## Get Started
 
