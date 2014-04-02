@@ -1,5 +1,5 @@
  <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
 	<meta charset="utf-8">
 	<title>Test Angular (dev)</title>
@@ -9,23 +9,60 @@
 <body>
  
 	<div class="container">
+		<!--<div ng-controller="language" class="expressions">
+		  {{t("NB_MSG")}}
+		  <p lang="NB_MSG"></p>
+		  <select ng-model="NB_MSG">
+			<option>0</option>
+			<option selected="true">1</option>
+			<option>2</option>
+			<option>3</option>
+		  </select>
+		</div>-->
 		
-		<select ng-model="numberMsg">
-			<option value="0">0</option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-		</select>
-		<hr>
-		<p id="msg_2"></p>
+		<div ng-controller="language" class="expressions">
+		   {{t("HELLO")}}
+		  <input ng-model="HELLO">
+		</div>
 	</div>
 
 	<script src="../../Languages.js"></script>
-	 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js"></script>
 	
 	<script>
-
+		var myApp = angular.module('myApp',[]);
+		
+		 myApp.directive('lang', [function() {
+ 
+			function link(scope, element, attrs) {
+			
+			  scope.$watch(attrs.lang, function(value) {
+				 element.text(attrs.lang.t(value));
+			  });
+			  
+			}
+			
+			return {
+			  link: link
+			};
+			
+		}]);
+		
+		myApp.controller('language', ['$scope', function($scope) {
+			Languages.init("en", "../languages/", function() {
+				$scope.lang = this.data;
+				$scope.t = function(txt) {
+					return txt.t($scope[txt]);
+				}
+				$scope.$apply();
+			});
+		}]);
+		
+		
+				
+		
 	</script>
 
+	
 </body>
 </html>

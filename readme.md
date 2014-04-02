@@ -24,13 +24,21 @@ Follow the steps below to start:
 
         Languages.init([id], [path], [callback]);
 
-        * id  : Identifier of the language in the JSON file. If the value is `null`, the language is that the browser
+        * id  : Identifier of the language in the JSON file.
         * path (optional) : Path to the folder JSON files. Default: `languages/`
         * callback (optional) : Function called when the JSON file is loaded
 
     Example :
 
         Languages.init("fr", "languages/", function() {
+
+        });
+
+    If the type of `id` is an array, language is the browser among the identifiers of the array. If it is not found in the array, the first element of the array will be the default language
+
+     Example :
+
+        Languages.init(["en", "fr", "jp", "es"], "languages/", function() {
 
         });
 

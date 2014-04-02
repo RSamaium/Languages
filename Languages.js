@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 /**
 
-	Languages.init("fr", "languages/", function() {
+	Languages.init(["fr", "en", "jp", "es"], "languages/", function() {
 		"TEST".t();
 	});
 */
@@ -38,14 +38,20 @@ var Languages = {
 	options: {},
 	init: function(id, path, callback) {
 	
-		if (!id) {
-			id = (	navigator.language || 
+		var _path, xhr, self = this, user_lang; 
+	
+		if (id instanceof Array) {
+			user_lang = (	navigator.language || 
 					navigator.userLanguage || 
 					this.current
 				 ).replace(/\-.+/, ""); 
+			if (id.indexOf(user_lang) == -1) {
+				id = id[0];
+			}
+			else {
+				id = user_lang;
+			}
 		}
-		
-		var _path, xhr, self = this; 
 		
 		this.current = id;
 		
@@ -99,6 +105,7 @@ var Languages = {
 		return this.data[id];
 	},
 	getPlurial: function(val, type) {
+		val = Math.abs(val);
 		if (!/^[0-9]+$/.test(val)) {
 			return false;
 		}
@@ -128,6 +135,9 @@ String.prototype.format = function() {
     	if (m == "%d") {
       		 plurial = args[i];
       	}
+		else if (m == "%p") {
+			break;
+		}
     }
     i = -1;
     return this.replace(/%[sdp]([0-9]+)?/g, function(match, number) { 

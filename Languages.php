@@ -57,6 +57,7 @@ class Languages {
 	}
 	
 	public static function getPlurial($val, $type) {
+		$val = abs($val);
 		if (!preg_match('#[0-9]+#', $val)) {
 			return false;
 		}
