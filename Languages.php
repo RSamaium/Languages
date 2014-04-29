@@ -28,7 +28,7 @@ Code :
 	
 	include("Languages.php");
 
-	Languages::init("fr", "languages/");
+	Languages::init(array("fr", "en", jp"), "languages/");
 	echo t("TEST");
 	echo t("TEST", 3);
 */
@@ -38,11 +38,18 @@ class Languages {
 			$data = array(),
 			$options = array();
 			
-	public static function init($id = null, $path = null) {
+	public static function init($id, $path = null) {
 		
-		if (!isset($id)) {
-			$id = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+		if (is_array($id)) {
+			$user_lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+			if (in_array($user_lang, $id)) {
+				$id = $user_lang;
+			}
+			else {
+				$id = $id[0];
+			}
 		}
+		
 		if (!isset($path)) $path = "./languages/";
 		
 		$json = json_decode(file_get_contents( $path . $id . ".json"), true);

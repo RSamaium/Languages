@@ -176,7 +176,7 @@ String.prototype.t = function(arg) {
 	return str;
 }
 
-
-if (fs) {
+// test `exports` for node-webkit
+if (fs && typeof(exports) !== "undefined") { 
 	exports.Languages = Languages;
 }
