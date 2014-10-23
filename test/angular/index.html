@@ -3,63 +3,72 @@
 <head>
 	<meta charset="utf-8">
 	<title>Test Angular (dev)</title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 </head>
 
 <body>
+	<div ng-controller="language">
+		<nav class="navbar navbar-default" role="navigation">
+	  		<div class="container-fluid">
+			      <ul class="nav navbar-nav navbar-right">
+			        <li class="dropdown">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{current_lang}} <span class="caret"></span></a>
+			          <ul class="dropdown-menu" role="menu">
+			             <li ng-repeat="lang in langs"><a href="#" ng-click="choiceLang(lang.id, lang.name)">{{lang.name}}</a></li>
+			          </ul>
+			        </li>
+			      </ul>
+			 </div>
+		</nav>
  
-	<div class="container">
-		<!--<div ng-controller="language" class="expressions">
-		  {{t("NB_MSG")}}
-		  <p lang="NB_MSG"></p>
-		  <select ng-model="NB_MSG">
-			<option>0</option>
-			<option selected="true">1</option>
-			<option>2</option>
-			<option>3</option>
-		  </select>
-		</div>-->
-		
-		<div ng-controller="language" class="expressions">
-		   {{t("HELLO")}}
-		  <input ng-model="HELLO">
+		<div class="container">
+			<h1>{{"TEXT".t()}}</h1>
+			<div class="expressions" class="panel panel-default">
+				<div class="panel-body">
+			  	 <p>{{"NB_MSG|EMPTY".t(nb_msg > 0, nb_msg)}}</p>
+			 	 <select ng-model="nb_msg" ng-options="value for value in [0, 1, 2, 3]">
+			  	</select>
+			  </div>
+			</div>
+			
+
 		</div>
 	</div>
 
 	<script src="../../Languages.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js"></script>
 	
 	<script>
 		var myApp = angular.module('myApp',[]);
 		
-		 myApp.directive('lang', [function() {
- 
-			function link(scope, element, attrs) {
-			
-			  scope.$watch(attrs.lang, function(value) {
-				 element.text(attrs.lang.t(value));
-			  });
-			  
-			}
-			
-			return {
-			  link: link
-			};
-			
-		}]);
-		
 		myApp.controller('language', ['$scope', function($scope) {
+
+			$scope.langs = [{
+				id: "fr",
+				name: "Français"
+			}, {
+				id: "en",
+				name: "English"
+			}];
+
 			Languages.init("en", "../languages/", function() {
-				$scope.lang = this.data;
-				$scope.t = function(txt) {
-					return txt.t($scope[txt]);
-				}
 				$scope.$apply();
-			});
+			}); 
+
+			$scope.current_lang = "English";
+			$scope.nb_msg = 0;
+
+			$scope.choiceLang = function(id, name) {
+				Languages.set(id, function() {
+					$scope.current_lang = name;
+					$scope.$apply();
+				});
+			}
+
 		}]);
-		
-		
-				
+			
 		
 	</script>
 

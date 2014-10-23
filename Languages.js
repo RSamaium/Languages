@@ -28,7 +28,7 @@ THE SOFTWARE.
 */
 
 var fs;
-if (typeof(require) !== "undefined") {
+if (typeof(exports) !== "undefined") {
 	fs = require('fs');
 }
 
@@ -36,6 +36,16 @@ var Languages = {
 	current: "en",
 	data: {},
 	options: {},
+	_path: null,
+	_cache: {},
+
+	set: function(id, callback) {
+		if (!this._path) {
+			throw "Initialize with `Languages.init()` before";
+		}
+		this.init(id, this._path, callback);
+		return this;
+	},
 	init: function(id, path, callback) {
 	
 		var _path, xhr, self = this, user_lang; 
@@ -61,14 +71,22 @@ var Languages = {
 		}
 		
 		if (!path) path = "./languages/";
+
+		this._path = path;
 		
 		_path =  path + id + ".json";
-	
+
 		function _callback(txt) {
 			var json = JSON.parse(txt);
+			self._cache[id] = txt;
 			self.data = json[0];
 			self.options = json[1];
 			if (callback) callback.call(self);
+		}
+
+		if (this._cache[id]) {
+			_callback(this._cache[id]);
+			return this;
 		}
 		
 		if (fs) {
@@ -76,7 +94,7 @@ var Languages = {
 				if (err) throw err;
 				_callback(ret.toString('ascii'));
 			});
-			return;
+			return this;
 		}
 		
 		try {  xhr = new ActiveXObject('Msxml2.XMLHTTP');   }
@@ -99,6 +117,8 @@ var Languages = {
 		
 	   xhr.open("GET", _path,  true); 
 	   xhr.send(); 
+
+	   return this;
 		
 	},
 	get: function(id) {

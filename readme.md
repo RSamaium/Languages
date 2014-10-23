@@ -1,6 +1,6 @@
 # Languages [.js ; .php]
 
-Version 0.8.1
+Version 0.8.2
 
 ## Description
 
@@ -47,6 +47,14 @@ Follow the steps below to start:
         Languages.init("fr", "languages/", function() {
             var txt = "HELLO_WORD".t();
         });
+
+4. To change the language :
+    
+        Languages.set("jp", function() {
+            var txt = "HELLO_WORD".t();
+        });
+
+    > Think about the functions and remember to update your interface
 
 ### NodeJS
 
