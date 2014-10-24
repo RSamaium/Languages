@@ -46,9 +46,21 @@ var Languages = {
 		this.init(id, this._path, callback);
 		return this;
 	},
-	init: function(id, path, callback) {
 	
-		var _path, xhr, self = this, user_lang; 
+	add: function(id, path, namespace, callback) {
+		this.init(id, path, callback, {
+			namespace: namespace
+		});
+	},
+
+	init: function(id, path, callback, options) {
+	
+		var _path, xhr, self = this, user_lang, namespace; 
+
+		options = options || {};
+		namespace = options.namespace || "self";
+
+		this._cache[namespace] = {};
 	
 		if (id instanceof Array) {
 			user_lang = (	navigator.language || 
@@ -72,20 +84,27 @@ var Languages = {
 		
 		if (!path) path = "./languages/";
 
+		
 		this._path = path;
+		
 		
 		_path =  path + id + ".json";
 
 		function _callback(txt) {
-			var json = JSON.parse(txt);
-			self._cache[id] = txt;
-			self.data = json[0];
-			self.options = json[1];
+			var json = JSON.parse(txt),
+				data = json[0],
+				_options = json[1];
+
+
+			self.data[namespace] = json[0];
+			self.options[namespace] = json[1];
+			
+			self._cache[namespace][id] = txt;
 			if (callback) callback.call(self);
 		}
 
-		if (this._cache[id]) {
-			_callback(this._cache[id]);
+		if (this._cache[namespace][id]) {
+			_callback(this._cache[namespace][id]);
 			return this;
 		}
 		
@@ -121,15 +140,20 @@ var Languages = {
 	   return this;
 		
 	},
-	get: function(id) {
-		return this.data[id];
+	get: function(id, namespace) {
+		namespace = namespace || "self";
+		if (!this.data[namespace]) {
+			return "";
+		}
+		return this.data[namespace][id];
 	},
-	getPlurial: function(val, type) {
+	getPlurial: function(val, type, namespace) {
+		namespace = namespace || "self";
 		val = Math.abs(val);
 		if (!/^[0-9]+$/.test(val)) {
 			return false;
 		}
-		var plurial = this.options.plurial[type];
+		var plurial = this.options[namespace].plurial[type];
 		if (!plurial) {
 			plurial = ["s"];
 		}
@@ -146,7 +170,7 @@ var Languages = {
 };
 
 String.prototype.format = function() {
-    var args = arguments, i=-1, plurial, val, m;
+    var args = arguments, i=-1, plurial, val, m, namespace = args[args.length-1];
     var match = this.match(/%[sdp]/g);
     if (!match) return this;
     for (var j=0 ; j < match.length ; j++) {
@@ -167,19 +191,20 @@ String.prototype.format = function() {
       	 if (plurial == undefined) {
       	 	plurial = val;
       	 }
-      	 val = Languages.getPlurial(plurial, match.replace("%", ""));
+      	 val = Languages.getPlurial(plurial, match.replace("%", ""), namespace);
       }
       return val;
     });
   };
 
 String.prototype.t = function(arg) {
-	var type, txt;
+	var type, txt, namespace = "self", match;
+
+	arguments = Array.prototype.slice.call(arguments, 1, arguments.length);	
 	
 	if (typeof arg == "boolean") {
 		type = this.split("|");
 		txt = arg ? type[0] : type[1];
-		arguments = Array.prototype.slice.call(arguments, 1, arguments.length);	
 	}
 	else {
 		txt = this;
@@ -187,8 +212,13 @@ String.prototype.t = function(arg) {
 	var words = txt.split(" "), w, str = "", word;
 	for (var i=0 ; i < words.length ; i++) {
 		w = words[i];
-		word = Languages.get(w);
+		if (match = /(.+)\.(.+)/.exec(w)) {
+			namespace = match[1];
+			w = match[2];
+		}
+		word = Languages.get(w, namespace);
 		if (word) {
+			arguments.push(namespace);
 			str += word.format.apply(word, arguments);
 		}
 		

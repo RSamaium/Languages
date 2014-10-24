@@ -1,6 +1,6 @@
 # Languages [.js ; .php]
 
-Version 0.8.2
+Version 0.9.0
 
 ## Description
 
@@ -56,6 +56,7 @@ Follow the steps below to start:
 
     > Think about the functions and remember to update your interface
 
+
 ### NodeJS
 
 The code is very simple. You just get the `Languages` ​​Module :
@@ -65,6 +66,19 @@ The code is very simple. You just get the `Languages` ​​Module :
     Languages.init("fr", "languages/", function() {
     	// Code
     });
+
+### Add a plugin system
+
+Sometimes you want to have language files elsewhere for a plugin. Files are loaded and added language to the interface
+
+    Languages.init("en", "core/languages/", function() {
+    	var txt = "HELLO_WORD".t();
+    });
+	Languages.add("en", "plugins/my_plugin/languages/", "plugin_name", function() {
+    	var txt = "plugin_name.HELLO_WORD".t();
+    });
+
+Use the `add()` method and add the plugin name (namespace)
 
 ## JSON configuration
 
