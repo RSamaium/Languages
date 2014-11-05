@@ -200,14 +200,14 @@ String.prototype.format = function() {
 String.prototype.t = function(arg) {
 	var type, txt, namespace = "self", match;
 
-	arguments = Array.prototype.slice.call(arguments, 1, arguments.length);	
-	
 	if (typeof arg == "boolean") {
 		type = this.split("|");
 		txt = arg ? type[0] : type[1];
+		arguments = Array.prototype.slice.call(arguments, 1, arguments.length);	
 	}
 	else {
 		txt = this;
+		arguments = Array.prototype.slice.call(arguments, 0, arguments.length);	
 	}
 	var words = txt.split(" "), w, str = "", word;
 	for (var i=0 ; i < words.length ; i++) {
