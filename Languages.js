@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2014 by WebCreative5 - Samuel Ronce
+Copyright (C) 2014-2015 by WebCreative5 - Samuel Ronce
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -87,7 +87,6 @@ var Languages = {
 		
 		this._path = path;
 		
-		
 		_path =  path + id + ".json";
 
 		function _callback(txt) {
@@ -109,10 +108,15 @@ var Languages = {
 		}
 		
 		if (fs) {
-			fs.readFile('./' + _path, 'ascii', function (err, ret) {
-				if (err) throw err;
-				_callback(ret.toString('ascii'));
-			});
+            if (!callback) {
+                _callback(fs.readFileSync('./' + _path, 'ascii'));
+            }
+            else {
+                fs.readFile('./' + _path, 'ascii', function (err, ret) {
+                    if (err) throw err;
+                    _callback(ret.toString('ascii'));
+                });
+            }
 			return this;
 		}
 		
@@ -166,36 +170,85 @@ var Languages = {
 		else {
 			return plurial[1] || "";
 		}
-	}
-};
+	},
+    format: function() {
+        var args = arguments, i=-1, plurial, val, m, namespace = args[args.length-1];
+        var match = this.match(/%[sdp]/g);
+        if (!match) return this;
+        for (var j=0 ; j < match.length ; j++) {
+            i++;
+            m = match[j];
+            if (m == "%d") {
+                 plurial = args[i];
+            }
+            else if (m == "%p") {
+                break;
+            }
+        }
+        i = -1;
+        return this.replace(/%[sdp]([0-9]+)?/g, function(match, number) { 
+          i++;
+          val = typeof args[i] != 'undefined' ? args[i] : match;
+          if (/^%p/.test(match)) {
+             if (plurial == undefined) {
+                plurial = val;
+             }
+             val = Languages.getPlurial(plurial, match.replace("%", ""), namespace);
+          }
+          return val;
+        });
+    },
+    require: function(module) {
+        var mod = require(module);
+        if (module == "express-hbs") {
+            return this.load.Handlebars(mod);
+        }
+        return mod;
+    },
+    load: {
+        Handlebars: function(Handlebars) {
+                
+            Handlebars.registerHelper('t', function(text, options) {
+                 var nb = options.hash.nb,
+                     _if = options.hash.if;
+                 if (nb === undefined) {
+                      return text.t();
+                 }
+                 else {
+                     if (_if === undefined) {
+                         return text.t(+nb);
+                     }
+                     else {
+                         return text.t(_if, +nb);
+                     }
+                 }
 
-String.prototype.format = function() {
-    var args = arguments, i=-1, plurial, val, m, namespace = args[args.length-1];
-    var match = this.match(/%[sdp]/g);
-    if (!match) return this;
-    for (var j=0 ; j < match.length ; j++) {
-    	i++;
-    	m = match[j];
-    	if (m == "%d") {
-      		 plurial = args[i];
-      	}
-		else if (m == "%p") {
-			break;
-		}
+            });
+            
+            return Handlebars;
+            
+        },
+        Angular: function(angular) {
+            
+                
+            angular .module("Languages", [])
+                    .provider("Languages", function() {
+
+                        this.init = Languages.init.bind(Languages);
+
+                        this.$get = function() {
+                            return Languages;
+                        }
+
+                    });
+            
+        }
     }
-    i = -1;
-    return this.replace(/%[sdp]([0-9]+)?/g, function(match, number) { 
-      i++;
-      val = typeof args[i] != 'undefined' ? args[i] : match;
-      if (/^%p/.test(match)) {
-      	 if (plurial == undefined) {
-      	 	plurial = val;
-      	 }
-      	 val = Languages.getPlurial(plurial, match.replace("%", ""), namespace);
-      }
-      return val;
-    });
-  };
+}
+
+var t = function(arg) {
+    
+}
 
 String.prototype.t = function(arg) {
 	var type, txt, namespace = "self", match;
@@ -219,12 +272,15 @@ String.prototype.t = function(arg) {
 		word = Languages.get(w, namespace);
 		if (word) {
 			arguments.push(namespace);
-			str += word.format.apply(word, arguments);
+			str += Languages.format.apply(word, arguments);
 		}
 		
 	}	
 	return str;
 }
+
+ if (typeof(Handlebars) !== "undefined") Languages.load.Handlebars(Handlebars);
+if (typeof(angular) !== "undefined")  Languages.load.Angular(angular);
 
 // test `exports` for node-webkit
 if (fs && typeof(exports) !== "undefined") { 

@@ -1,6 +1,6 @@
 {
     "name": "languages",
-    "version": "0.8.0",
+    "version": "0.1.0",
     "description": "Management phrases in several languages",
     "main": "index.js",
     "bin": { "languages": "Languages.js" },

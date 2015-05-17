@@ -1,5 +1,5 @@
  <!DOCTYPE html>
-<html ng-app="myApp">
+<html ng-app="app">
 <head>
 	<meta charset="utf-8">
 	<title>Test Angular (dev)</title>
@@ -35,16 +35,25 @@
 		</div>
 	</div>
 
-	<script src="../../Languages.js"></script>
+	
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js"></script>
-	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular.min.js"></script>
+	<script src="../../Languages.js"></script>
+    
 	<script>
-		var myApp = angular.module('myApp',[]);
 		
-		myApp.controller('language', ['$scope', function($scope) {
-
+       
+        var app = angular.module("app", ["Languages"]);
+        
+        app.config(["LanguagesProvider", function(Languages) {
+            
+            Languages.init("fr", "../languages/");
+            
+        }]);
+		
+		app.controller('language', ['$scope', 'Languages', function($scope, Languages) {
+        
 			$scope.langs = [{
 				id: "fr",
 				name: "Français"
@@ -52,10 +61,6 @@
 				id: "en",
 				name: "English"
 			}];
-
-			Languages.init("en", "../languages/", function() {
-				$scope.$apply();
-			}); 
 
 			$scope.current_lang = "English";
 			$scope.nb_msg = 0;

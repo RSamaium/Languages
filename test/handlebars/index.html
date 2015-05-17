@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+    <head>
+       <title>Handlebars</title>
+    </head
+    <body>
+
+        <div class="container">
+            <p>{{t "TEXT"}}</p>
+            <select id="select">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+            <hr>
+            <p>{{t "NB_MSG|EMPTY" nb=nbMessage if=hasMessage}}</p>
+        </div>
+
+    
+        <script src="handlebars-v3.0.3.js"></script>
+        <script src="../../Languages.js"></script>
+        
+        <script>
+          
+            
+            (function() {
+                
+                 
+                    var nbMessage = 0;
+                
+                    var body = document.querySelector("body"), 
+                        template = Handlebars.compile(body.innerHTML);
+                    
+                    function refresh() {
+                        
+                        var data = {
+                            nbMessage: nbMessage,
+                            hasMessage: nbMessage > 0
+                        }
+
+                        body.innerHTML = template(data); 
+                        
+                        document.getElementById("select").addEventListener("change", function() {
+                            nbMessage = this.value;
+                            refresh();
+                        });
+                        
+                    }
+                     
+
+                    Languages.init("fr", "../languages/", refresh);
+                    
+        
+            })();
+            
+            
+          
+            
+         
+            
+          
+        </script>
+    </body>
+</html>
