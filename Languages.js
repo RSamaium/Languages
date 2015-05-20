@@ -53,28 +53,64 @@ var Languages = {
 		});
 	},
 
+    /**
+    
+        id {Array or String} : Language code :
+        
+        ISO-639 + _ + ISO-3166
+        Language Code + "_" + Country Code
+        
+        Example :
+        
+        fr_FR
+        en_EN
+        en_US
+        
+        If only ISO-639 (en, fr, jp, etc.) :
+        
+        fr : fr_FR
+        en : en_EN
+    
+    */
 	init: function(id, path, callback, options) {
 	
-		var _path, xhr, self = this, user_lang, namespace; 
+		var _path, xhr, self = this, user_lang, namespace, cloneLang = [], lang;
 
 		options = options || {};
 		namespace = options.namespace || "self";
 
 		this._cache[namespace] = {};
+        
+        function getCountryCode(lang) {
+            return lang += "_" + lang.toUpperCase();
+        }
 	
 		if (id instanceof Array) {
-			user_lang = (	navigator.language || 
+			user_lang = getCountryCode((	navigator.language || 
 					navigator.userLanguage || 
 					this.current
-				 ).replace(/\-.+/, ""); 
-			if (id.indexOf(user_lang) == -1) {
-				id = id[0];
+				 ).replace(/\-.+/, "")); 
+            
+            for (var i=0 ; i < id.length ; i++) {
+                lang = id[i];
+                if (!/_/.test(id[i])) {
+                   lang = getCountryCode(lang);
+                }
+                cloneLang.push(lang);
+            }
+			
+            if (cloneLang.indexOf(user_lang) == -1) {
+				id = cloneLang[0];
 			}
 			else {
 				id = user_lang;
 			}
 		}
 		
+        if (!/_/.test(id)) {
+            id = getCountryCode(id);
+        }
+        
 		this.current = id;
 		
 		if (typeof path == "function") {
@@ -90,6 +126,9 @@ var Languages = {
 		_path =  path + id + ".json";
 
 		function _callback(txt) {
+            
+            txt = txt.toString('utf8');
+            
 			var json = JSON.parse(txt),
 				data = json[0],
 				_options = json[1];
@@ -109,12 +148,12 @@ var Languages = {
 		
 		if (fs) {
             if (!callback) {
-                _callback(fs.readFileSync('./' + _path, 'ascii'));
+                _callback(fs.readFileSync(_path));
             }
             else {
-                fs.readFile('./' + _path, 'ascii', function (err, ret) {
+                fs.readFile(_path, function (err, ret) {
                     if (err) throw err;
-                    _callback(ret.toString('ascii'));
+                    _callback(ret);
                 });
             }
 			return this;
@@ -198,8 +237,8 @@ var Languages = {
           return val;
         });
     },
-    require: function(module) {
-        var mod = require(module);
+    require: function(module, obj) {
+        var mod = obj || require(module);
         if (module == "express-hbs") {
             return this.load.Handlebars(mod);
         }
@@ -207,7 +246,7 @@ var Languages = {
     },
     load: {
         Handlebars: function(Handlebars) {
-                
+            
             Handlebars.registerHelper('t', function(text, options) {
                  var nb = options.hash.nb,
                      _if = options.hash.if;
@@ -246,10 +285,6 @@ var Languages = {
     }
 }
 
-var t = function(arg) {
-    
-}
-
 String.prototype.t = function(arg) {
 	var type, txt, namespace = "self", match;
 
@@ -279,7 +314,7 @@ String.prototype.t = function(arg) {
 	return str;
 }
 
- if (typeof(Handlebars) !== "undefined") Languages.load.Handlebars(Handlebars);
+if (typeof(Handlebars) !== "undefined") Languages.load.Handlebars(Handlebars);
 if (typeof(angular) !== "undefined")  Languages.load.Angular(angular);
 
 // test `exports` for node-webkit

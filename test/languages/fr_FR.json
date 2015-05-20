@@ -1,5 +1,5 @@
 [{
-    "TEXT": "Selectionnez un nombre de message : ",
+    "TEXT": "Sélectionnez un nombre de message : ",
 	"NB_MSG": "Vous avez %d message%p",
 	"EMPTY": "Vous n'avez aucun message !",
 	"HORSE": "%d cheva%p1",

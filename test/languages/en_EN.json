@@ -1,0 +1,12 @@
+[{
+    "TEXT": "Select a message number : ",
+	"NB_MSG": "You have %d post%p",
+	"EMPTY": "You have no messages !",
+	"HELLO": "Good Afternoon %s"
+},
+{
+    "plurial": {
+		"p": ["s"]
+	},
+	"name": "en"
+}]
