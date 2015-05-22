@@ -1,15 +1,32 @@
 {
-    "name": "languages",
-    "version": "0.1.0",
-    "description": "Management phrases in several languages",
-    "main": "index.js",
-    "bin": { "languages": "languages.js" },
-    "author": "WebCreative5",
-    "keywords": ["languages"],
-    "repository" : {
-        "type": "git",
-        "url": "https://github.com/RSamaium/Languages.git"
-    },
-    "license": "MIT"
-    "engines": { "node": "*" }
+  "name": "languages-js",
+  "version": "1.0.0",
+  "description": "Translation system in Javascript with the JSON format.",
+  "main": "languages.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RSamaium/Languages.git"
+  },
+  "keywords": [
+    "language",
+    "handlebars",
+    "express",
+    "nodejs",
+    "i18n",
+    "require",
+    "plugins",
+    "plurial"
+  ],
+  "author": "WebCreative5, Samuel Ronce",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RSamaium/Languages/issues"
+  },
+  "homepage": "https://github.com/RSamaium/Languages"
 }

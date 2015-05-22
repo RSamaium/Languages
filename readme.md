@@ -1,16 +1,17 @@
-# Languages [.js ; .php]
+# Languages.js
 
-Version 0.9.0
+Version 1.0.0
 
 ## Description
 
-Management phrases in several languages
+Translation system in Javascript with the JSON format.
 
 ## Works with
 
 * Javascript
 * Node.js
-* PHP (>=5.3)
+* AngularJS
+* Handlebars
 
 ## Get Started
 
@@ -55,17 +56,62 @@ Follow the steps below to start:
         });
 
     > Think about the functions and remember to update your interface
+    
+    > Note that you can call a language of a country. Example :
+    >       Languages.init("en_US", "languages/", function() {
+    >
+    >       });
 
 
 ### NodeJS
 
-The code is very simple. You just get the `Languages` ​​Module :
+#### Installation
 
-    var Languages = require("Languages").Languages;
+    npm install languages-js
+    
+#### Usage
+
+The code is very simple. You just get the `languages-js` module :
+
+    var Languages = require("languages-js").Languages;
     
     Languages.init("fr", "languages/", function() {
     	// Code
     });
+    
+### AngularJS
+
+    var app = angular.module("app", ["Languages"]);
+        
+    app.config(["LanguagesProvider", function(Languages) {
+            
+            Languages.init("fr", "../languages/");
+            
+    }]);
+    
+### Handlebars
+
+    <p>{{t "TEXT"}}</p>
+    
+And more parameters :
+
+Example 1 :
+
+    <p>{{t "NB_MSG" nb=2}}</p>
+    
+Example 2 :
+
+    <p>{{t "NB_MSG|EMPTY" nb=1 if=true}}</p>
+    
+With Express-hbs module :
+
+
+    var hbs = require('express-hbs');
+    var Languages = require("languages-js").Languages;
+
+    Languages.require('express-hbs')
+
+    Languages.init("fr", "../languages/");
 
 ### Add a plugin system
 
@@ -84,7 +130,7 @@ Use the `add()` method and add the plugin name (namespace)
 
 The files must be defined in the `path` folder in `init()` method. The file name must be the identifier defined in the method `init()`. If possible, use the same name as the identifier of the browser (`navigator.language`)
 
-Example : `languages/fr.json`, `languages/en.json`, etc.
+Example : `languages/fr_FR.json`, `languages/en_EN.json`, `languages/en_US.json`, etc.
 
 JSON file must have the following format:
 
