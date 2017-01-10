@@ -1,0 +1,10 @@
+[{
+
+    "hello": "hello world"
+},
+{
+    "plurial": {
+        "p": ["s"],
+        "p1": ["ies", "y"]
+    }
+}]

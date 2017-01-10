@@ -1,0 +1,237 @@
+[{
+
+    "hello": "Bonjour",
+    "and": "et",
+
+    "password": "mot de passe",
+    "password $verbs": "{2} le {1}",
+    "password forgotten": "{1} oublié ?",
+
+    "connection": "connexion",
+    "logout": "déconnexion",
+    "signup": "s'inscrire",
+    "you have already an account ?": "vous avez déjà un compte ?",
+    "connect": "se connecter",
+    "connect now": "{1} tout de suite !",
+    "login on": "Connectez-vous sur %s !",
+    "welcome": "bienvenue sur %s",
+    "thanks and welcome": "Merci de votre inscription et {3}",
+    "connect with $platform": "{1} avec {3}",
+
+    "$attributes": {
+      "email": "email",
+      "firstname": "prénom",
+      "lastname": "nom",
+      "username": "nom d'utilisateur",
+      "age": "age",
+      "male": "homme",
+      "female": "Femme",
+      "description": "description",
+      "thumb": "vignette",
+      "data": "données"
+    },
+
+    "all": "Tout",
+    "all $verbs": "{1} {2}",
+    "save as": "{1} sous",
+    "send to": "{1} vers",
+
+    "$verbs": {
+      "repeat": "répéter",
+      "confirm": "confirmer",
+      "continue": "continuer",
+      "explore": "explorer",
+      "add": "ajouter",
+      "remove": "enlever",
+      "delete": "supprimer",
+      "cancel": "annuler",
+      "validate": "valider",
+      "search": "rechercher",
+      "accept": "accepter",
+      "send": "envoyer",
+      "edit": "modifier",
+      "change": "changer",
+      "preview": "prévisualiser",
+      "view": "voir",
+      "publish": "publier",
+      "reset": "remettre",
+      "upload": "charger",
+      "download": "télécharger",
+      "increase": "augmenter",
+      "decrease": "diminuer",
+      "move": "déplacer",
+      "buy": "acheter",
+      "sell": "vendre",
+      "drop": "déposer",
+      "drag": "glisser",
+      "cut": "couper",
+      "copy": "copier",
+      "paste": "coller",
+      "open": "ouvrir",
+      "save": "sauvegarder",
+      "close": "fermer",
+      "quit": "quitter",
+      "ignore": "ignorer",
+      "create": "créer",
+      "discover": "découvrir",
+      "finish": "terminer",
+      "split": "diviser",
+      "find": "trouver",
+      "clear": "effacer",
+      "select": "selectionner",
+      "share": "partager",
+      "invit": "inviter",
+      "manage": "gérer",
+      "moderate": "modérer",
+      "read": "lire",
+      "filter": "filtrer",
+      "forbid": "interdire",
+      "contact": "contacter",
+      "enable": "activer",
+      "disable": "désactiver",
+      "recommend": "recommander",
+      "build": "constuire"
+    },
+
+    "$verbs_past": {
+      "modified": "modifié",
+      "required": "requis",
+      "modified at": "{1} le"
+    },
+
+    "$platform": {
+      "facebook": "Facebook",
+      "gmail": "Gmail"
+    },
+
+    "$filter": {
+        "recent": "récent"
+    },
+
+    "loading": "chargement",
+    "new": "nouveau%p2",
+    "novelty": "Nouveauté%p",
+    "action": "action",
+    "empty": "vide",
+    "format": "format",
+    "status": "statut",
+    "language": "langue",
+    "notification": "notification%p",
+    "data required":"donnée%p requise%p",
+    "date": "date%p",
+    "between":" entre",
+
+    "my": "m%p1",
+    "my $objects": "{1} {2}",
+    "drop $objects here": "Placez ici vos {2}",
+    "loading $objects": "{1} des {2}",
+
+    "$objects": {
+        "publication": "publication%p",
+        "image": "image%p",
+        "video": "video%p",
+        "file": "fichier%p",
+        "directory": "répertoire%p",
+        "folder": "dossier%p",
+        "music": "musique%p",
+        "friend": "ami%p",
+        "avatar": "avatar%p",
+        "banner": "bannière%p",
+        "module": "module%p",
+        "entity": "entité%p",
+        "message": "message%p",
+        "platform": "plateforme%p",
+        "graphics": "graphique%p",
+        "token": "token",
+        "package": "paquet%p"
+    },
+
+    "reset draft": "{1} en {2}",
+
+    "$states": {
+        "draft": "brouillon",
+        "private": "privé",
+        "public": "public",
+        "protected": "protégé",
+        "forbidden": "interdit",
+        "forbidden access": "Accès {1}"
+    },
+
+    "parameter modification": "{2} des {1}",
+    "parameter $verbs": "{2} des {1}",
+    "$actions save": "{2} les {1}",
+    "$verbs an account": "{1} un {3}",
+
+    "$actions": {
+        "profile": "profil%p",
+        "help": "aide",
+        "home": "accueil",
+        "setting": "réglage%p",
+        "preference": "préference%p",
+        "parameter": "paramètre%p",
+        "account": "compte%p",
+        "administration": "administration",
+        "modification": "modification%p",
+        "management": "gestion",
+        "trash": "corbeille",
+        "user": "utilisateur%p",
+        "conception": "conception",
+        "next": "suivant",
+        "previous": "précédent"
+    },
+
+    "user ask": "l'utilisateur dit",
+    "user ask example": "Ex: Rechercher un film, réserver une table",
+    "active user": "{2} actif%p",
+    "new user": "{1} {2}",
+
+    "$messages": {
+      "lost password": "Entrez l'adresse email avec laquelle vous vous êtes inscrit. Nous allons vous envoyer un email avec un lien pour réinitialiser votre mot de passe",
+      "search not found": "Désolé, nous ne trouvons aucun résultat pour \"%s\". Vérifiez l'orthographe ou essayez une recherche différente.",
+      "login impossible": "Impossible de se connecter. Vérifiez votre identifiant ou mot de passe",
+      "do you delete": "Etes vous sûr se supprimer ces éléments ?",
+      "field required": "Ce champ est requis",
+      "password diff": "Le mot de passe n'est pas égal au précédent",
+      "minimum chars": "Il faut minimum %d caractère%p",
+      "invalid email": "L'email est invalide"
+    },
+
+    "$roles $verbs": "{2} un {1}",
+    "role": "rôle%p",
+
+    "$roles": {
+      "admin": "administrateur%p",
+      "moderator": "modérateur%p",
+      "author": "auteur%p",
+      "member": "membre%p",
+      "reader": "lecteur%p",
+      "anonymous": "anonyme%p",
+      "buyer": "acheteur%p",
+      "seller": "vendeur%p",
+      "creator": "créateur%p",
+      "player": "joueur%p",
+      "editor": "éditeur%p",
+      "subscriber": "abonné%p",
+      "contributor": "contributeur%p"
+    },
+
+    "global": "globalement",
+    "precis": "précisément",
+
+    "title": "titre",
+    "back": "retour",
+    "step": "étape %d sur %d",
+    "follow step": "suivez les étapes suivantes",
+    "remember": "se souvenir",
+    "remember me": "{1} de moi",
+
+    "update": "mise à jour",
+    "accept general condition": "j'accepte les conditions d'utilisation"
+},
+{
+    "plurial": {
+        "p": ["s"],
+        "p1": ["es", "on"],
+        "p2": ["x"]
+    }
+}]

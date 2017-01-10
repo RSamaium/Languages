@@ -1,13 +1,12 @@
 {
   "name": "languages-js",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Translation system in Javascript with the JSON format.",
   "main": "languages.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --timeout 0 ./tests/*.spec.js",
+    "build": "webpack",
+    "docs": ""
   },
   "repository": {
     "type": "git",
@@ -28,5 +27,13 @@
   "bugs": {
     "url": "https://github.com/RSamaium/Languages/issues"
   },
-  "homepage": "https://github.com/RSamaium/Languages"
+  "homepage": "https://github.com/RSamaium/Languages",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.18.0",
+    "chai": "^3.5.0",
+    "webpack": "^1.14.0"
+  }
 }

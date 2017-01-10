@@ -1,0 +1,217 @@
+[{
+
+    "hello": "hello",
+
+    "password": "password",
+    "password $verbs": "{2} {1}",
+    "password forgotten": "{1} forgotten ?",
+
+    "connection": "login",
+    "logout": "logout",
+    "signup": "signup",
+    "$you already an account ?": "{1} already an account ?",
+    "connect": "to connect",
+    "connect now": "{1} now !",
+    "login on": "Log in on %s !",
+    "welcome": "welcome on %s",
+    "thanks and welcome": "Thank you of your inscription and {3}",
+    "connect with $platform": "{1} with {3}",
+
+    "$you": {
+      "you have": "you have"
+    },
+
+    "$you nb $objects": "{1} %d {3}",
+    "$you no $objects": "{1} no {3}",
+
+    "$attributes": {
+      "email": "email",
+      "firstname": "first name",
+      "lastname": "last name",
+      "username": "user name",
+      "age": "age",
+      "male": "male",
+      "female": "female",
+      "description": "description",
+      "thumb": "thumb"
+    },
+
+    "all": "all",
+    "all $verbs": "{1} {2}",
+    "save as": "{1} as",
+    "send to": "{1} to",
+
+    "$verbs": {
+      "repeat": "repeat",
+      "confirm": "confirm",
+      "continue": "continue",
+      "explore": "explore",
+      "add": "add",
+      "remove": "remove",
+      "delete": "delete",
+      "cancel": "cancel",
+      "validate": "validate",
+      "search": "search",
+      "accept": "accept",
+      "send": "send",
+      "edit": "edit",
+      "change": "change",
+      "preview": "preview",
+      "view": "view",
+      "publish": "publish",
+      "reset": "reset",
+      "upload": "upload",
+      "download": "download",
+      "increase": "increase",
+      "decrease": "decrease",
+      "move": "move",
+      "buy": "buy",
+      "sell": "sell",
+      "drop": "drop",
+      "drag": "drag",
+      "cut": "cut",
+      "copy": "copy",
+      "paste": "paste",
+      "open": "open",
+      "save": "save",
+      "close": "close",
+      "quit": "quitquitter",
+      "ignore": "ignore",
+      "create": "create",
+      "discover": "discover",
+      "finish": "finish",
+      "split": "split",
+      "find": "find",
+      "clear": "clear",
+      "select": "select",
+      "share": "share",
+      "invit": "invit",
+      "manage": "manage",
+      "moderate": "moderate",
+      "read": "read",
+      "filter": "filter",
+      "forbid": "forbid",
+      "contact": "contact",
+      "enable": "enable",
+      "disable": "disable",
+      "recommend": "recommend"
+    },
+
+    "$verbs_past": {
+      "modified": "modified"
+    },
+
+    "$platform": {
+      "facebook": "Facebook",
+      "gmail": "Gmail"
+    },
+
+    "$filter": {
+        "recent": "recent"
+    },
+
+    "loading": "loading",
+    "new": "new%p",
+    "novelty": "novelt%p",
+    "action": "action",
+    "empty": "empty",
+    "format": "format",
+    "status": "status",
+    "language": "language",
+
+    "my": "my",
+    "my $objects": "{1} {2}",
+    "drop $objects here": "drop {2} here",
+    "loading $objects": "{1} {2}",
+
+    "$objects": {
+        "publication": "publication%p",
+        "image": "image%p",
+        "video": "video%p",
+        "file": "file%p",
+        "directory": "director%p1",
+        "folder": "folder%p",
+        "music": "music%p",
+        "friend": "friend%p",
+        "avatar": "avatar%p",
+        "banner": "banner%p",
+        "message": "message%p"
+    },
+
+    "reset draft": "{1} {2}",
+
+    "$states": {
+        "draft": "draft",
+        "private": "private",
+        "public": "public",
+        "protected": "protected",
+        "forbidden": "forbidden",
+        "forbidden access": "forbidden {1}"
+    },
+
+    "parameter modification": "{2} {1}",
+    "parameter $verbs": "{2} {1}",
+    "$actions save": "{2} {1}",
+    "$verbs an account": "{1} {3}",
+
+    "$actions": {
+        "profile": "profilze%p",
+        "help": "help",
+        "home": "home",
+        "setting": "home%p",
+        "preference": "preference%p",
+        "parameter": "parameter%p",
+        "account": "account%p",
+        "administration": "administration",
+        "modification": "modification%p",
+        "management": "management",
+        "trash": "trash",
+        "user": "user"
+    },
+
+    "$messages": {
+      "lost password": "Enter the email address with which you registered. We will send you an email with a link to reset your password",
+      "search not found": "Sorry we do not find any results for \"%s\". Check your spelling or try a different search.",
+      "login impossible": "Impossible to connect. Check your username or password",
+      "do you delete": "Are you sure you remove items?",
+      "field required": "This field is required",
+      "password diff": "The password is not equal to the previous",
+      "minimum chars": "It takes minimum %d character%p",
+      "invalid email": "The email is invalid"
+    },
+
+    "$roles $verbs": "{1} {2}",
+    "role": "role%p",
+
+    "$roles": {
+      "admin": "administrateur%p",
+      "moderator": "moderator%p",
+      "author": "author%p",
+      "member": "member%p",
+      "reader": "reader%p",
+      "anonymous": "anonymous",
+      "buyer": "buyer%p",
+      "seller": "seller%p",
+      "creator": "creator%p",
+      "player": "player%p",
+      "editor": "editor%p",
+      "subscriber": "subscriber%p",
+      "contributor": "contributor%p"
+    },
+
+    "title": "title",
+    "back": "back",
+    "step": "step %d / %d",
+    "remember": "remember",
+    "remember me": "{1} me",
+
+    "update": "update",
+    "accept general condition": "i accept the conditions of use"
+
+},
+{
+    "plurial": {
+        "p": ["s"],
+        "p1": ["ies", "y"]
+    }
+}]
