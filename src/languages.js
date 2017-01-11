@@ -22,29 +22,36 @@ THE SOFTWARE.
 
 var Languages = (function() {
 
-	let fs, isServerSide = false;
+	let fs, instance, isServerSide = false;
 
 	if (typeof(exports) !== "undefined" && typeof(window) === "undefined") {
 		fs = require('fs');
 		isServerSide = true;
 	}
 
-	const Languages = {
-		current: "en",
-		data: {},
-		options: {},
-		_path: null,
-		_cache: {},
-		_list: [],
+	class Languages  {
+
+		constructor() {
+			this.current = "en";
+			this.data = {};
+			this.options = {};
+			this._path = null;
+			this._cache = {};
+			this._list = [];
+		}
+
+		instance() {
+			return instance = new Languages();
+		}
 
 		set(id, callback) {
 			this.init(id, this._path, callback);
 			return this;
-		},
+		}
 
 		add(id, path, namespace, callback) {
 			this.init(id, path, callback, { namespace });
-		},
+		}
 
 		packages(languages, options={}) {
 			const namespace = options.namespace || "self";
@@ -55,11 +62,18 @@ var Languages = (function() {
 				this._cache[namespace][key] = languages[key];
 			}
 			return this;
-		},
+		}
 
-		default(id, options) {
-			return this.init([id], false, false, options)
-		},
+		default(id, options={}) {
+			const namespace = options.namespace || "self"
+			let ids = []
+			ids.push(id)
+			for (let key in this._cache[namespace]) {
+				if (key == id) continue;
+				ids.push(key)
+			}
+			return this.init(ids, false, false, options)
+		}
 
 		init(id, path, callback, options={}) {
 
@@ -122,8 +136,8 @@ var Languages = (function() {
 				if (callback && !notCall) callback.call(self);
 			}
 
-			if (this._cache[namespace][id]) {
-				_callback(this._cache[namespace][id]);
+			if (this._cache[namespace][this.current]) {
+				_callback(this._cache[namespace][this.current]);
 				return this;
 			}
 
@@ -164,7 +178,7 @@ var Languages = (function() {
 		  xhr.send();
 
 		  return this;
-		},
+		}
 
 		getUserLanguage() {
 			if (isServerSide) {
@@ -173,7 +187,7 @@ var Languages = (function() {
 			else {
 				return navigator.language || navigator.userLanguage || this.current;
 			}
-		},
+		}
 
 		_initMultiple(obj) {
 			let ids, regex = /\[(.+)\]/,
@@ -245,7 +259,7 @@ var Languages = (function() {
 				}
 			}
 			return obj;
-		},
+		}
 
 		get(id, namespace, lang) {
 			lang = lang || this.current;
@@ -254,11 +268,11 @@ var Languages = (function() {
 				return '';
 			}
 			return this.replaceWorlds(this.data[lang][namespace][id], id, namespace);
-		},
+		}
 
 		capitalizeFirstLetter(str) {
 	    return str.charAt(0).toUpperCase() + str.slice(1);
-		},
+		}
 
 		replaceWorlds(str, id, namespace) {
 				let params = {}
@@ -273,7 +287,7 @@ var Languages = (function() {
 						let ids = params.replacePattern || id.split(' ');
 						return this.get(ids[number-1], namespace);
 				});
-		},
+		}
 
 		getPlurial(val, type, namespace, lang) {
 			namespace = namespace || 'self';
@@ -297,7 +311,8 @@ var Languages = (function() {
 			else {
 				return plurial[1] || '';
 			}
-		},
+		}
+
     format(word, namespace, localCurrent, ...args) {
         let i=-1, plurial, val;
         let match = word.match(/%[sdp]/g);
@@ -326,53 +341,62 @@ var Languages = (function() {
           }
           return val;
         });
-	    },
-	    load: {
-	        Handlebars(Handlebars) {
+	    }
+	  	get load() {
+				let self = this
+				return {
+		        Handlebars(Handlebars) {
 
-	            Handlebars.registerHelper('t', function(text, options) {
-	                 var nb = options.hash.nb,
-	                     _if = options.hash.if;
-	                 if (nb === undefined) {
-	                      return text.t();
-	                 }
-	                 else {
-	                     if (_if === undefined) {
-	                         return text.t(+nb);
-	                     }
-	                     else {
-	                         return text.t(_if, +nb);
-	                     }
-	                 }
+		            Handlebars.registerHelper('t', function(text, options) {
+		                 var nb = options.hash.nb,
+		                     _if = options.hash.if;
+		                 if (nb === undefined) {
+		                      return text.t();
+		                 }
+		                 else {
+		                     if (_if === undefined) {
+		                         return text.t(+nb);
+		                     }
+		                     else {
+		                         return text.t(_if, +nb);
+		                     }
+		                 }
 
-	            });
+		            });
 
-	            return Handlebars;
+		            return Handlebars;
 
-	        },
-	        Angular(angular) {
+		        },
+		        Angular(angular) {
+		            angular .module("Languages", [])
+		                    .provider("Languages", function() {
 
+		                        this.init = self.init.bind(Languages);
 
-	            angular .module("Languages", [])
-	                    .provider("Languages", function() {
+		                        this.$get = function() {
+		                            return self;
+		                        }
 
-	                        this.init = Languages.init.bind(Languages);
+		                    }).filter('t', function() {
 
-	                        this.$get = function() {
-	                            return Languages;
-	                        }
+												  return function(str, ...expression) {
+												     return str.t(...expression);
+												  };
 
-	                    }).filter('t', function() {
-
-											  return function(str, ...expression) {
-											     return str.t(...expression);
-											  };
-
-											});
-
-
-	        }
-	    },
+												})
+		        },
+						get Vue() {
+							return {
+								install(Vue, options) {
+								  Vue.Languages = self
+									Vue.filter('t', (value, ...expression) => {
+									  return self.translate(value, ...expression);
+									})
+								}
+							} // return
+					 }
+				 } // second return
+	    }
 			translate(value, ...args) {
 				var type, txt, namespace = "self", localCurrent;
 
@@ -421,14 +445,16 @@ var Languages = (function() {
 			}
 	}
 
+	instance = new Languages();
+
 	String.prototype.t = function(...args) {
-		return Languages.translate(this, ...args)
+		return instance.translate(this, ...args)
 	}
 
-	if (typeof(Handlebars) !== "undefined") Languages.load.Handlebars(Handlebars);
-	if (typeof(angular) !== "undefined")  Languages.load.Angular(angular);
+	if (typeof(Handlebars) !== "undefined") instance.load.Handlebars(Handlebars);
+	if (typeof(angular) !== "undefined")  instance.load.Angular(angular);
 
-	return Languages;
+	return instance;
 })();
 
 module.exports = Languages;

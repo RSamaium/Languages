@@ -8,7 +8,7 @@
     "build": "webpack",
     "docs": "gitbook build",
     "deploy": "gh-pages -d _book",
-    "postpublish": "bower register languages-js https://github.com/RSamaium/Languages.git && yarn publish"
+    "postpublish": "yarn publish"
   },
   "repository": {
     "type": "git",

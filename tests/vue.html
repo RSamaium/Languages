@@ -1,0 +1,20 @@
+<script src="https://unpkg.com/vue@2.1.8/dist/vue.min.js"></script>
+<script src="../src/languages.js"></script>
+<script>
+
+Vue.use(Languages.load.Vue)
+
+var app = new Vue({
+
+})
+
+window.onload = function() {
+  Languages.init(['en_EN', 'fr_FR'], '../langs/', () => {
+    app.$mount('#app');
+  })
+}
+
+</script>
+<body>
+  <div id="app">{{'hello' | t}}</div>
+</body>

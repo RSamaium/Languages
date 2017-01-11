@@ -117,6 +117,10 @@ Languages.init(['fr_FR'], './languages/', () => {
 });
 ```
 
+##
+
+[Simple Plunker Demo](https://plnkr.co/edit/yMB2LkZ1oA4b0xOLUy96)
+
 ## License
 
 MIT. Free for commercial use.

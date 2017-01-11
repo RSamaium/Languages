@@ -1,9 +1,10 @@
 const {expect} = require('chai');
-const Languages = require('../src/languages')
+var Languages = require('../src/languages')
 
 describe('Test Language', function() {
 
   before(done => {
+      Languages = Languages.instance();
       Languages.init(['en_EN', 'fr_FR'], `${__dirname}/../langs/`, done);
   })
 
@@ -72,6 +73,10 @@ describe('Test Language', function() {
 
   it('Two IDs', () => {
     expect('you have + message'.t(2)).to.equal('You have messages');
+  })
+
+  it('Id not exists', () => {
+    expect('foo'.t()).to.equal('');
   })
 
   describe('With namespace', function() {

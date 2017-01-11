@@ -17,9 +17,10 @@
 * [Using an object directly](docs/packages.md)
 * [Change the language](docs/set.md)
 
-## 3third party integration
+## Third party integration
 
-* [AngularJS](docs/angularjs.md)
+* [AngularJS 1](docs/angularjs.md)
+* [VueJS 2](docs/vue.md)
 * [Handlebars](docs/handlebars.md)
 
 ## Development

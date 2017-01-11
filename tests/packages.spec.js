@@ -1,5 +1,5 @@
 const {expect} = require('chai');
-const Languages = require('../src/languages')
+var Languages = require('../src/languages')
 
 describe('Open Languages JSON', function() {
 
@@ -7,6 +7,7 @@ describe('Open Languages JSON', function() {
   const en_EN = require('../langs/en_EN.json')
 
   before(() => {
+      Languages = Languages.instance();
       Languages.packages({ fr_FR, en_EN }).default('en_EN')
   })
 
