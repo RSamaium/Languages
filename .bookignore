@@ -1,7 +1,6 @@
-*.js
-package.json
-*.txt
-src
-langs
-tests
-.*
+*
+
+!book.json
+!docs/
+!readme.md
+!summary.md

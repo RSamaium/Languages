@@ -94,7 +94,7 @@ var Languages = (function() {
 			}
 
 			if (path) {
-				_path =  path + id + ".json";
+				_path =  path + this.current + ".json";
 			}
 
 			let _callback = (txt, id, notCall) => {

@@ -65,7 +65,15 @@ or ES6
 import Languages from 'languages-js'
 ```
 
-2. Initialize languages
+3. Directory structure
+
+  - languages
+    - fr_FR.json
+    - en_EN.json
+    - ...
+  - script.js
+
+4. Initialize languages
 
 ```js
 Languages.init(id, [path], [callback]);
@@ -101,7 +109,7 @@ Languages.init(['fr_FR'], './languages/', () => {
 If the type of `id` is an array, language is the browser among the identifiers of the array. If it is not found in the array, the first element of the array will be the default language
 
 
-3. To translate a sentence, use the identifier with the function `t()` in the callback function :
+5. To translate a sentence, use the identifier with the function `t()` in the callback function :
 
 ```js
 Languages.init(['fr_FR'], './languages/', () => {

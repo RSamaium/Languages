@@ -22,6 +22,8 @@ Languages.packages({ fr_FR, en_EN }).default('en_EN')
 'hello'.t() // 'Hello'
 ```
 
+[Test Code](https://jsfiddle.net/2vu4531f/)
+
 ## NodeJS
 
 With NodeJS, you can recover the JSON with `require()`

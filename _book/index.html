@@ -330,9 +330,11 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="i18n-and-l10n--languagesjs">i18n and l10n : Languages.js</h1>
-<p>Version 2.0.0</p>
+<p>Version 2.0.x</p>
 <h2 id="description">Description</h2>
 <p>Translation system in Javascript with the JSON format.</p>
+<h2 id="fully-documentation">Fully Documentation</h2>
+<p><a href="https://rsamaium.github.io/Languages" target="_blank">https://rsamaium.github.io/Languages</a></p>
 <h2 id="works-with">Works with</h2>
 <ul>
 <li>Javascript</li>
@@ -345,19 +347,40 @@
 <ol>
 <li>Install the script</li>
 </ol>
-<p>Browser</p>
+<p>Link</p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;path/languages.min.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre>
-<p>NodeJS</p>
+<p>CDN</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://unpkg.com/languages-js/languages.min.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<p>NPM</p>
 <pre><code>npm install languages-js --save
-</code></pre><p>and import :</p>
+</code></pre><p>Yarn</p>
+<pre><code>yarn add languages-js
+</code></pre><p>Bower</p>
+<pre><code>bower install languages-js
+</code></pre><ol>
+<li>Import :</li>
+</ol>
 <pre><code class="lang-js"><span class="hljs-keyword">const</span> Languages = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;languages-js&apos;</span>)
 </code></pre>
 <p>or ES6</p>
 <pre><code class="lang-js"><span class="hljs-keyword">import</span> Languages <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;languages-js&apos;</span>
 </code></pre>
 <ol>
-<li>Initialize languages</li>
+<li><p>Directory structure</p>
+<ul>
+<li>languages<ul>
+<li>fr_FR.json</li>
+<li>en_EN.json</li>
+<li>...</li>
+</ul>
+</li>
+<li>script.js</li>
+</ul>
+</li>
+<li><p>Initialize languages</p>
+</li>
 </ol>
 <pre><code class="lang-js">Languages.init(id, [path], [callback]);
 </code></pre>
@@ -438,7 +461,7 @@ Language Code + &quot;_&quot; + Country Code
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Get started","level":"1.1","depth":1,"next":{"title":"Create a JSON language","level":"2.1","depth":1,"path":"docs/json.md","ref":"docs/json.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"readme.md","mtime":"2017-01-11T08:30:26.053Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-11T08:32:23.312Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Get started","level":"1.1","depth":1,"next":{"title":"Create a JSON language","level":"2.1","depth":1,"path":"docs/json.md","ref":"docs/json.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"readme.md","mtime":"2017-01-11T11:21:35.385Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-11T13:50:54.803Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
