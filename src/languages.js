@@ -20,13 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-/**
-
-	Languages.init(["fr", "en", "jp", "es"], "languages/", function() {
-		"TEST".t();
-	});
-*/
-
 var Languages = (function() {
 
 	let fs, isServerSide = false;
@@ -67,27 +60,7 @@ var Languages = (function() {
 		default(id, options) {
 			return this.init([id], false, false, options)
 		},
-
-	    /**
-
-	        id {Array or String} : Language code :
-
-	        ISO-639 + _ + ISO-3166
-	        Language Code + "_" + Country Code
-
-	        Example :
-
-	        fr_FR
-	        en_EN
-	        en_US
-
-	        If only ISO-639 (en, fr, jp, etc.) :
-
-	        fr : fr_FR
-	        en : en_EN
-
-	    */
-
+		
 		init(id, path, callback, options={}) {
 
 			let _path, xhr;
