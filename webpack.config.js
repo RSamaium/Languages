@@ -6,8 +6,10 @@ module.exports = {
       fs: "empty"
      },
      output: {
-         path: './',
-         filename: 'languages.min.js',
+        path: './',
+        filename: 'languages.min.js',
+        libraryTarget: 'var',
+        library: 'Languages'
      },
      module: {
          loaders: [{

@@ -60,7 +60,7 @@ var Languages = (function() {
 		default(id, options) {
 			return this.init([id], false, false, options)
 		},
-		
+
 		init(id, path, callback, options={}) {
 
 			let _path, xhr;
@@ -179,7 +179,7 @@ var Languages = (function() {
 			let ids, regex = /\[(.+)\]/,
 					specialId,
 					isGroup,
-					group = /^\$[^ ]+$/;
+					group = /^\$[^ ]+$/,
 					special = /\$[^ ]+/g,
 					tmpObj = {}, finalObj = {};
 
@@ -428,10 +428,7 @@ var Languages = (function() {
 	if (typeof(Handlebars) !== "undefined") Languages.load.Handlebars(Handlebars);
 	if (typeof(angular) !== "undefined")  Languages.load.Angular(angular);
 
-	// test `exports` for node-webkit
-	if (fs && typeof(exports) !== "undefined") {
-		module.exports = Languages;
-	}
-
 	return Languages;
 })();
+
+module.exports = Languages;

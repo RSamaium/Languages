@@ -1,5 +1,5 @@
 const {expect} = require('chai');
-const Languages = require('../languages')
+const Languages = require('../src/languages')
 
 describe('Test Language', function() {
 

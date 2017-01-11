@@ -1,7 +1,7 @@
 {
   "name": "languages-js",
   "description": "Translation system in Javascript with the JSON format.",
-  "main": "src/languages.js",
+  "main": "languages.min.js",
   "authors": [
     "WebCreative5",
     "Samuel Ronce"

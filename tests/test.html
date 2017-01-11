@@ -1,0 +1,20 @@
+<script src="../languages.min.js"></script>
+<script>
+window.onload = function() {
+  const fr_FR = [
+    {
+      "hello": "bonjour"
+    },
+    {}
+  ]
+  const en_EN =  [
+    {
+      "hello": "hello"
+    },
+    {}
+  ]
+
+  Languages.packages({ fr_FR, en_EN }).default('en_EN')
+  console.log('hello'.t())
+}
+</script>
