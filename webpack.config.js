@@ -7,7 +7,7 @@ module.exports = {
      },
      output: {
          path: './',
-         filename: 'language.min.js',
+         filename: 'languages.min.js',
      },
      module: {
          loaders: [{

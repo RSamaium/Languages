@@ -1,0 +1,28 @@
+{
+  "name": "languages-js",
+  "description": "Translation system in Javascript with the JSON format.",
+  "main": "src/languages.js",
+  "authors": [
+    "WebCreative5",
+    "Samuel Ronce"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "language",
+    "handlebars",
+    "express",
+    "nodejs",
+    "i18n",
+    "require",
+    "plugins",
+    "plurial"
+  ],
+  "homepage": "https://github.com/RSamaium/Languages",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

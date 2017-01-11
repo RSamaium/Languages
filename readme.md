@@ -6,6 +6,10 @@ Version 2.0.0
 
 Translation system in Javascript with the JSON format.
 
+## Fully Documentation
+
+https://rsamaium.github.io/Languages
+
 ## Works with
 
 * Javascript
@@ -19,19 +23,43 @@ Follow the steps below to start:
 
 1. Install the script
 
-Browser
+Link
 
 ```html
 <script src="path/languages.min.js"></script>
 ```
 
-NodeJS
+CDN
+
+```html
+<script src="https://unpkg.com/languages-js"></script>
+```
+
+minified :
+
+```html
+<script src="https://unpkg.com/languages-js/languages.min.js"></script>
+```
+
+NPM
 
 ```
 npm install languages-js --save
 ```
 
-and import :
+Yarn
+
+```
+yarn add languages-js
+```
+
+Bower
+
+```
+bower install languages-js
+```
+
+2. Import :
 
 ```js
 const Languages = require('languages-js')
