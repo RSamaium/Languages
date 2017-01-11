@@ -32,12 +32,6 @@ Link
 CDN
 
 ```html
-<script src="https://unpkg.com/languages-js"></script>
-```
-
-minified :
-
-```html
 <script src="https://unpkg.com/languages-js/languages.min.js"></script>
 ```
 
