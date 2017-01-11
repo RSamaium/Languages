@@ -188,11 +188,57 @@
 
     
         
+        <li class="header">API</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="docs/namespace.html">
+            
+                <a href="docs/namespace.html">
+            
+                    
+                    Namespace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="docs/packages.html">
+            
+                <a href="docs/packages.html">
+            
+                    
+                    Using an object directly
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="docs/set.html">
+            
+                <a href="docs/set.html">
+            
+                    
+                    Change the language
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
         <li class="header">3third party integration</li>
         
         
     
-        <li class="chapter " data-level="3.1" data-path="docs/angularjs.html">
+        <li class="chapter " data-level="4.1" data-path="docs/angularjs.html">
             
                 <a href="docs/angularjs.html">
             
@@ -205,12 +251,32 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="docs/handlebars.html">
+        <li class="chapter " data-level="4.2" data-path="docs/handlebars.html">
             
                 <a href="docs/handlebars.html">
             
                     
                     Handlebars
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Development</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="docs/dev.html">
+            
+                <a href="docs/dev.html">
+            
+                    
+                    Development
             
                 </a>
             
@@ -263,8 +329,8 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="languagesjs">Languages.js</h1>
-<p>Version 1.0.0</p>
+                                <h1 id="i18n-and-l10n--languagesjs">i18n and l10n : Languages.js</h1>
+<p>Version 2.0.0</p>
 <h2 id="description">Description</h2>
 <p>Translation system in Javascript with the JSON format.</p>
 <h2 id="works-with">Works with</h2>
@@ -295,10 +361,30 @@
 </ol>
 <pre><code class="lang-js">Languages.init(id, [path], [callback]);
 </code></pre>
-<pre><code>* id : Identifier of the language in the JSON file.
-* path : Path to the folder JSON files.
-* callback (optional) : Function called when the JSON file is loaded
-</code></pre><p>  Example :</p>
+<ul>
+<li>id {Array or String} : Identifier of the language in the JSON file.</li>
+</ul>
+<blockquote>
+<p><code>id</code> format :</p>
+<pre><code>ISO-639 + _ + ISO-3166
+Language Code + &quot;_&quot; + Country Code
+</code></pre><p>Example :</p>
+<ul>
+<li>fr_FR</li>
+<li>en_EN</li>
+<li>en_US</li>
+</ul>
+<p>If only ISO-639 (en, fr, jp, etc.) :</p>
+<ul>
+<li>fr : fr_FR</li>
+<li>en : en_EN</li>
+</ul>
+</blockquote>
+<ul>
+<li>path : Path to the folder JSON files.</li>
+<li>callback (optional) : Function called when the JSON file is loaded</li>
+</ul>
+<p>Example :</p>
 <pre><code class="lang-js">Languages.init([<span class="hljs-string">&apos;fr_FR&apos;</span>], <span class="hljs-string">&apos;./languages/&apos;</span>, () =&gt; {
   <span class="hljs-comment">// is loaded</span>
 });
@@ -311,15 +397,6 @@
     <span class="hljs-string">&apos;hello&apos;</span>.t() <span class="hljs-comment">// Bonjour</span>
 });
 </code></pre>
-<h3 id="add-a-plugin-system">Add a plugin system</h3>
-<p>Sometimes you want to have language files elsewhere for a plugin. Files are loaded and added language to the interface</p>
-<pre><code>Languages.init(&quot;en&quot;, &quot;core/languages/&quot;, function() {
-    var txt = &quot;HELLO_WORD&quot;.t();
-});
-  Languages.add(&quot;en&quot;, &quot;plugins/my_plugin/languages/&quot;, &quot;plugin_name&quot;, function() {
-    var txt = &quot;plugin_name.HELLO_WORD&quot;.t();
-});
-</code></pre><p>Use the <code>add()</code> method and add the plugin name (namespace)</p>
 <h2 id="license">License</h2>
 <p>MIT. Free for commercial use.</p>
 
@@ -361,7 +438,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Get started","level":"1.1","depth":1,"next":{"title":"Create a JSON language","level":"2.1","depth":1,"path":"docs/json.md","ref":"docs/json.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"readme.md","mtime":"2017-01-10T16:59:28.928Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-11T07:53:32.849Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Get started","level":"1.1","depth":1,"next":{"title":"Create a JSON language","level":"2.1","depth":1,"path":"docs/json.md","ref":"docs/json.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"readme.md","mtime":"2017-01-11T08:30:26.053Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-11T08:32:23.312Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

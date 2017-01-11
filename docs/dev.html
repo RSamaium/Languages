@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Plurial · GitBook</title>
+        <title>Development · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="pattern.html" />
     
-    
-    <link rel="prev" href="json.html" />
+    <link rel="prev" href="handlebars.html" />
     
 
     </head>
@@ -122,7 +120,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.2" data-path="plurial.html">
+        <li class="chapter " data-level="2.2" data-path="plurial.html">
             
                 <a href="plurial.html">
             
@@ -273,7 +271,7 @@
         
         
     
-        <li class="chapter " data-level="5.1" data-path="dev.html">
+        <li class="chapter active" data-level="5.1" data-path="dev.html">
             
                 <a href="dev.html">
             
@@ -316,7 +314,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Plurial</a>
+        <a href=".." >Development</a>
     </h1>
 </div>
 
@@ -331,67 +329,19 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="plurial">Plurial</h1>
-<p>The plural is defined in the JSON with the <code>plurial</code> key. Consider an example :</p>
-<pre><code class="lang-json">[{
-    <span class="hljs-string">&quot;you have nb message&quot;</span>: <span class="hljs-string">&quot;you have %d message%p&quot;</span>
-},
-{
-    <span class="hljs-string">&quot;plurial&quot;</span>: {
-            <span class="hljs-string">&quot;p&quot;</span>: [<span class="hljs-string">&quot;s&quot;</span>]
-      }
-}]
-</code></pre>
-<p>Here, the <code>%d</code>parameter specifies an integer number is expected for <code>you have nb message</code> id. <code>%p</code> indicates that the plural of the term is used. The plural will be based on the value of <code>%d</code>. In <code>plurial</code> parameter, we define a rule. For <code>%p</code> in the plural, the letter <code>s</code> is added at the end.</p>
-<p>The result will be :</p>
-<pre><code class="lang-js"><span class="hljs-keyword">let</span> nbMsg = <span class="hljs-number">1</span>;
-<span class="hljs-string">&apos;you have nb message&apos;</span>.t(nbMsg); <span class="hljs-comment">// You have 1 message</span>
-
-nbMsg = <span class="hljs-number">2</span>;
-<span class="hljs-string">&apos;you have nb message&apos;</span>.t(nbMsg); <span class="hljs-comment">// You have 2 messages</span>
-</code></pre>
-<h4 id="plural-feature">Plural feature</h4>
-<p>It may be that the plural is different depending on a word. You can set it like this:</p>
-<pre><code class="lang-json">[{
-    <span class="hljs-string">&quot;you have nb accessory&quot;</span>: <span class="hljs-string">&quot;you have %d accessor%p1&quot;</span>
-},
-{
-    <span class="hljs-string">&quot;plurial&quot;</span>: {
-      <span class="hljs-string">&quot;p&quot;</span>: [<span class="hljs-string">&quot;s&quot;</span>],
-      <span class="hljs-string">&quot;p1&quot;</span>: [<span class="hljs-string">&quot;ies&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>]
-      }
-}]
-</code></pre>
-<p>Here, we define a new rule of plural.</p>
-<p>The result will be :</p>
-<pre><code class="lang-js"><span class="hljs-keyword">let</span> nb = <span class="hljs-number">1</span>;
-<span class="hljs-string">&apos;you have nb accessory&apos;</span>.t(nb); <span class="hljs-comment">// You have 1 accessory</span>
-
-nb = <span class="hljs-number">2</span>;
-<span class="hljs-string">&apos;you have nb accessory&apos;</span>.t(nb); <span class="hljs-comment">// You have 2 accessories</span>
-</code></pre>
-<p>Thus, the table is defined as follows:</p>
-<pre><code>&quot;p[0-9]+&quot;: [plurial, singular, duel, triel, ...]
-</code></pre><h2 id="parameters">Parameters</h2>
-<p>In a string, you can add parameters :</p>
-<pre><code class="lang-json">[{
-    <span class="hljs-string">&quot;you name is&quot;</span>: <span class="hljs-string">&quot;you name is %s, you&apos;re %d&quot;</span>
-},
-{
-    <span class="hljs-string">&quot;plurial&quot;</span>: {
-      <span class="hljs-string">&quot;p&quot;</span>: [<span class="hljs-string">&quot;s&quot;</span>]
-      }
-}]
-</code></pre>
-<p>The code will :</p>
-<pre><code class="lang-js">  <span class="hljs-string">&apos;you name is&apos;</span>.t(<span class="hljs-string">&apos;Sam&apos;</span>, <span class="hljs-number">21</span>);
-</code></pre>
-<p>Parameters are :</p>
-<ul>
-<li><code>%s</code> : string</li>
-<li><code>%d</code> : decimal</li>
-<li><code>%p</code> : indicates a plural (see above)</li>
-</ul>
+                                <h1 id="development">Development</h1>
+<p>To develop <code>languages.js</code> :</p>
+<h2 id="installation">Installation</h2>
+<p><code>npm install -g webpack mocha gitbook</code>
+<code>npm install</code></p>
+<h2 id="unit-tests">Unit Tests</h2>
+<p><code>npm test</code></p>
+<h2 id="minify-languagesjs">Minify languages.js</h2>
+<p><code>npm run build</code></p>
+<h2 id="generate-documentation">Generate documentation</h2>
+<p><code>npm run docs</code></p>
+<h2 id="deploy-documentation">Deploy documentation</h2>
+<p><code>npm run deploy</code></p>
 
                                 
                                 </section>
@@ -419,14 +369,10 @@ nb = <span class="hljs-number">2</span>;
 
             
                 
-                <a href="json.html" class="navigation navigation-prev " aria-label="Previous page: Create a JSON language">
+                <a href="handlebars.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Handlebars">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="pattern.html" class="navigation navigation-next " aria-label="Next page: Pattern">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -435,7 +381,7 @@ nb = <span class="hljs-number">2</span>;
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Plurial","level":"2.2","depth":1,"next":{"title":"Pattern","level":"2.3","depth":1,"path":"docs/pattern.md","ref":"docs/pattern.md","articles":[]},"previous":{"title":"Create a JSON language","level":"2.1","depth":1,"path":"docs/json.md","ref":"docs/json.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/plurial.md","mtime":"2017-01-10T16:16:46.516Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-11T08:32:23.312Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Development","level":"5.1","depth":1,"previous":{"title":"Handlebars","level":"4.2","depth":1,"path":"docs/handlebars.md","ref":"docs/handlebars.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/dev.md","mtime":"2017-01-11T08:26:50.441Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-11T08:32:23.312Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
