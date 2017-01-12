@@ -1,0 +1,26 @@
+[{
+
+  "$you": {
+    "you have": "vous avez"
+  },
+
+  "$you nb $objects": "{1} %d {3}",
+  "$you no $objects": "{1} aucun {3}",
+
+  "$objects": {
+      "image": "image%p",
+      "video": "vidéo%p",
+      "file": "fichier%p",
+      "directory": "répertoire%p",
+      "folder": "dossier%p",
+      "music": "musique%p",
+      "friend": "ami%p",
+      "message": "message%p"
+  }
+
+},
+{
+    "plurial": {
+        "p": ["s"]
+    }
+}]

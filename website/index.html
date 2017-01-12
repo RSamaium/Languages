@@ -1,0 +1,226 @@
+<!DOCTYPE HTML>
+<!--
+	Story by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Story by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+		<link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/master/devicon.min.css">
+
+
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="divided">
+
+				<!-- One -->
+					<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+						<div class="content">
+							<h1>Languages.js</h1>
+							<p class="major"><!--[-->Internationalization for Javascript and many frameworks<!--]--></p>
+
+
+							<ul class="actions">
+								<li><a href="#first" class="button">Get Started</a></li>
+								<li><a href="/_book" class="button">Documentation</a></li>
+								<li><a href="https://github.com/RSamaium/Languages" class="button ">Github</a></li>
+							</ul>
+						</div>
+						<div id="demo" class="content">
+
+							<el-tabs v-model="activeName">
+						    <el-tab-pane label="Demo" name="first">
+
+									<el-row :gutter="20">
+									  <el-col :span="24">
+											<span class="demonstration">Numbers</span>
+											<el-slider v-model="nb" max="10"></el-slider>
+										</el-col>
+
+									</el-row>
+									<el-row :gutter="20">
+										<el-col :span="24">
+											<el-dropdown @command="itemClick" trigger="click">
+												<el-button>
+											  {{item | t}} <i class="el-icon-caret-bottom el-icon--right"></i>
+											  </el-button>
+											 <el-dropdown-menu slot="dropdown">
+												 <el-dropdown-item :command="item" v-for="item in items">{{item | t}}</el-dropdown-item>
+											 </el-dropdown-menu>
+										 </el-dropdown>
+										 <el-dropdown @command="languageClick" trigger="click">
+											 <el-button>
+											 {{languages[lang]}} <i class="el-icon-caret-bottom el-icon--right"></i>
+											 </el-button>
+											<el-dropdown-menu slot="dropdown">
+												<el-dropdown-item :command="key" v-for="(language, key) in languages">{{language}}</el-dropdown-item>
+											</el-dropdown-menu>
+										</el-dropdown>
+										</el-col>
+									</el-row>
+									<div class="box" style="margin-top: 10px;">
+										{{msg | t(nb>0, nb)}}
+									</div>
+
+								</el-tab-pane>
+						    <el-tab-pane label="Javascript" name="second">
+										<pre><code>
+let nbMsg = 3;
+// open JSON language (en_EN.json, fr_FR.json, etc) in ./languages directory
+Languages.init(['en_EN', 'fr_FR'], './languages/', () => {
+	// After loading, translated according to the JSON settings.
+  "you have (nb message | no message)".t(nbMsg > 0, nbMsg)
+})
+										</code></pre>
+								</el-tab-pane>
+						    <el-tab-pane label="JSON English" name="third">
+									<pre><code>
+[{
+
+  "$you": {
+    "you have": "you have"
+  },
+
+  "$you nb $objects": "{1} %d {3}",
+  "$you no $objects": "{1} no {3}",
+
+  "$objects": {
+      "image": "image%p",
+      "video": "video%p",
+      "file": "file%p",
+      "directory": "director%p1",
+      "folder": "folder%p",
+      "music": "music%p",
+      "friend": "friend%p",
+      "message": "message%p"
+  }
+
+},
+{
+    "plurial": {
+        "p": ["s"],
+        "p1": ["ies", "y"]
+    }
+}]
+								</code>	</pre>
+								</el-tab-pane>
+						  </el-tabs>
+						</template>
+
+
+
+						</div>
+					</section>
+
+				<!-- Two -->
+					<section class="spotlight style1 orient-right content-align-left" id="first">
+						<div class="content">
+							<div class="align-center">
+							<h2>Installation</h2>
+							<p>
+								Follow the steps below to start:</p>
+							</div>
+
+
+<h3>Download</h3>
+
+<p><a href="https://unpkg.com/languages-js@latest/languages.min.js">Download here</a> and add in your code :</p>
+
+<pre><code>&lt;script src="path/languages.min.js"&gt;&lt;/script&gt;</pre></code>
+
+<h3>CDN</h3>
+
+<pre><code>&lt;script src="https://unpkg.com/languages-js@latest/languages.min.js"&gt;&lt;/script&gt;</pre></code>
+
+<h3>NPM</h3>
+
+<pre><code>npm install languages-js --save</pre></code>
+
+<h3>Yarn</h3>
+
+<pre><code>yarn add languages-js</pre></code>
+
+<h3>Bower</h3>
+
+<pre><code>bower install languages-js</pre></code>
+
+						</div>
+					</section>
+
+
+
+					<section class="spotlight style1 orient-right content-align-left" id="first">
+						<div class="content">
+							<div class="align-center">
+							<h2>Usage</h2>
+							<p>
+								Follow the steps below to start:</p>
+							</div>
+
+	<h3>Directories structure</h3>
+
+
+		<pre><code>
+> main.js
+> languages
+--> en_EN.json
+		</pre></code>
+
+	<h3>Create JSON file : <code>en_EN.json</code></h3>
+
+	<pre><code>
+[{
+  "hello": "hello world"
+},
+
+}]
+	</pre></code>
+
+<h3>Initialize Languages and translate</h3>
+
+<p>In main.js</p>
+
+<pre><code>
+Languages.init('en_EN', './languages/', () => {
+   'hello'.t() // hello world
+});
+</pre></code>
+
+<h3>Test</h3>
+
+<iframe src="https://embed.plnkr.co/yMB2LkZ1oA4b0xOLUy96/" width="100%" height="500px"></iframe>
+
+
+						</div>
+					</section>
+
+				<!-- Footer -->
+					<footer class="wrapper style1 align-center">
+						<div class="inner">
+
+							<p>&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="https://unpkg.com/vue@2.1.8/dist/vue.min.js"></script>
+			<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+			<script src="../src/languages.js"></script>
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

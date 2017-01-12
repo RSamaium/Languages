@@ -13,8 +13,6 @@ and JS :
 
 ```js
 // use plugin
-Vue.use(Languages.load.Vue)
-
 var app = new Vue({
   // your component
 })
@@ -60,4 +58,30 @@ Languages .packages({fr_FR, en_EN})
           .default('en_EN')
 
 export default Languages
+```
+
+## Use filter
+
+```html
+<p>{{'hello' | t}}</p>
+```
+
+You can use the settings :
+
+```html
+<p>{{'you have nb message' | t(2)}}</p>
+```
+
+## Languages instance
+
+You can access to `Languages` instance directly in `Vue` :
+
+```js
+Vue.Languages
+```
+
+Example :
+
+```js
+Vue.Languages.set('fr_FR')
 ```

@@ -289,6 +289,15 @@ var Languages = (function() {
 				});
 		}
 
+		getGroup(name, namespace='self') {
+			let groups = this.data[this.current][namespace]['$' + name];
+			let array = [];
+			for (let key in groups) {
+				array.push(key);
+			}
+			return array;
+		}
+
 		getPlurial(val, type, namespace, lang) {
 			namespace = namespace || 'self';
 			lang = lang || this.current;
@@ -453,6 +462,7 @@ var Languages = (function() {
 
 	if (typeof(Handlebars) !== "undefined") instance.load.Handlebars(Handlebars);
 	if (typeof(angular) !== "undefined")  instance.load.Angular(angular);
+	if (typeof(Vue) !== "undefined") Vue.use(instance.load.Vue);
 
 	return instance;
 })();

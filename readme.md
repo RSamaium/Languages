@@ -32,7 +32,7 @@ Link
 CDN
 
 ```html
-<script src="https://unpkg.com/languages-js/languages.min.js"></script>
+<script src="https://unpkg.com/languages-js@latest/languages.min.js"></script>
 ```
 
 NPM
