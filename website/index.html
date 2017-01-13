@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="assets/css/loader.css" />
 		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
 		<link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/master/devicon.min.css">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/github.min.css">
 	</head>
 	<body>
 
@@ -75,44 +76,44 @@
 
 									</el-tab-pane>
 							    <el-tab-pane label="Javascript" name="second">
-											<pre><code>
-	let nbMsg = 3;
-	// open JSON language (en_EN.json, fr_FR.json, etc) in ./languages directory
-	Languages.init(['en_EN', 'fr_FR'], './languages/', () => {
-		// After loading, translated according to the JSON settings.
-	  "you have (nb message | no message)".t(nbMsg > 0, nbMsg)
-	})
+											<pre><code class="javascript">
+let nbMsg = 3;
+// open JSON language (en_EN.json, fr_FR.json, etc) in ./languages directory
+Languages.init(['en_EN', 'fr_FR'], './languages/', () => {
+	// After loading, translated according to the JSON settings.
+  "you have (nb message | no message)".t(nbMsg > 0, nbMsg)
+})
 											</code></pre>
 									</el-tab-pane>
 							    <el-tab-pane label="JSON English" name="third">
-										<pre><code>
-	[{
+										<pre><code class="json">
+[{
 
-	  "$you": {
-	    "you have": "you have"
-	  },
+  "$you": {
+    "you have": "you have"
+  },
 
-	  "$you nb $objects": "{1} %d {3}",
-	  "$you no $objects": "{1} no {3}",
+  "$you nb $objects": "{1} %d {3}",
+  "$you no $objects": "{1} no {3}",
 
-	  "$objects": {
-	      "image": "image%p",
-	      "video": "video%p",
-	      "file": "file%p",
-	      "directory": "director%p1",
-	      "folder": "folder%p",
-	      "music": "music%p",
-	      "friend": "friend%p",
-	      "message": "message%p"
-	  }
+  "$objects": {
+      "image": "image%p",
+      "video": "video%p",
+      "file": "file%p",
+      "directory": "director%p1",
+      "folder": "folder%p",
+      "music": "music%p",
+      "friend": "friend%p",
+      "message": "message%p"
+  }
 
-	},
-	{
-	    "plurial": {
-	        "p": ["s"],
-	        "p1": ["ies", "y"]
-	    }
-	}]
+},
+{
+    "plurial": {
+        "p": ["s"],
+        "p1": ["ies", "y"]
+    }
+}]
 									</code>	</pre>
 									</el-tab-pane>
 							  </el-tabs>
@@ -138,23 +139,23 @@
 
 <p><a href="https://unpkg.com/languages-js@latest/languages.min.js">Download here</a> and add in your code :</p>
 
-<pre><code>&lt;script src="path/languages.min.js"&gt;&lt;/script&gt;</pre></code>
+<pre><code class="html">&lt;script src="path/languages.min.js"&gt;&lt;/script&gt;</pre></code>
 
 <h3>CDN</h3>
 
-<pre><code>&lt;script src="https://unpkg.com/languages-js@latest/languages.min.js"&gt;&lt;/script&gt;</pre></code>
+<pre><code class="html">&lt;script src="https://unpkg.com/languages-js@latest/languages.min.js"&gt;&lt;/script&gt;</pre></code>
 
 <h3>NPM</h3>
 
-<pre><code>npm install languages-js --save</pre></code>
+<pre><code class="bash">npm install languages-js --save</pre></code>
 
 <h3>Yarn</h3>
 
-<pre><code>yarn add languages-js</pre></code>
+<pre><code class="bash">yarn add languages-js</pre></code>
 
 <h3>Bower</h3>
 
-<pre><code>bower install languages-js</pre></code>
+<pre><code class="bash">bower install languages-js</pre></code>
 
 						</div>
 					</section>
@@ -172,7 +173,7 @@
 	<h3>Directories structure</h3>
 
 
-		<pre><code>
+		<pre><code class="bash">
 > main.js
 > languages
 --> en_EN.json
@@ -180,7 +181,7 @@
 
 	<h3>Create JSON file : <code>en_EN.json</code></h3>
 
-	<pre><code>
+	<pre><code class="json">
 [{
   "hello": "hello world"
 },
@@ -192,7 +193,7 @@
 
 <p>In main.js</p>
 
-<pre><code>
+<pre><code class="javascript">
 Languages.init('en_EN', './languages/', () => {
    'hello'.t() // hello world
 });
@@ -229,7 +230,7 @@ Languages.init('en_EN', './languages/', () => {
 					<footer class="wrapper style1 align-center">
 						<div class="inner">
 
-							<p>&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+							<p>&copy; Languages.js Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
 						</div>
 					</footer>
 
@@ -239,12 +240,13 @@ Languages.init('en_EN', './languages/', () => {
 			<script src="https://unpkg.com/vue@2.1.8/dist/vue.min.js"></script>
 			<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 			<script src="https://unpkg.com/languages-js@latest/languages.min.js"></script>
+			<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.min.js"></script>
-
+			<script>hljs.initHighlightingOnLoad();</script>
 	</body>
 </html>
