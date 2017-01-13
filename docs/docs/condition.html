@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Change the language · GitBook</title>
+        <title>Condition · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="angularjs.html" />
+    <link rel="next" href="add.html" />
     
     
-    <link rel="prev" href="packages.html" />
+    <link rel="prev" href="group.html" />
     
 
     </head>
@@ -161,7 +161,7 @@
             
         </li>
     
-        <li class="chapter " data-level="2.5" data-path="condition.html">
+        <li class="chapter active" data-level="2.5" data-path="condition.html">
             
                 <a href="condition.html">
             
@@ -220,7 +220,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="3.3" data-path="set.html">
+        <li class="chapter " data-level="3.3" data-path="set.html">
             
                 <a href="set.html">
             
@@ -236,7 +236,7 @@
 
     
         
-        <li class="header">3third party integration</li>
+        <li class="header">Third party integration</li>
         
         
     
@@ -245,7 +245,7 @@
                 <a href="angularjs.html">
             
                     
-                    AngularJS
+                    AngularJS 1
             
                 </a>
             
@@ -253,7 +253,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="handlebars.html">
+        <li class="chapter " data-level="4.2" data-path="vue.html">
+            
+                <a href="vue.html">
+            
+                    
+                    VueJS 2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="handlebars.html">
             
                 <a href="handlebars.html">
             
@@ -316,7 +329,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Change the language</a>
+        <a href=".." >Condition</a>
     </h1>
 </div>
 
@@ -331,33 +344,32 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="change-the-language">Change the language</h1>
-<p>You can change the language with the <code>set()</code> method. Think, however, of initializing languages :</p>
-<pre><code class="lang-js">Languages.init([<span class="hljs-string">&apos;en_EN&apos;</span>, <span class="hljs-string">&apos;fr_FR&apos;</span>], <span class="hljs-string">&apos;languages/&apos;</span>, () =&gt; {
-    <span class="hljs-string">&apos;hello&apos;</span>.t() <span class="hljs-comment">// Hello</span>
-  Languages.set(<span class="hljs-string">&apos;fr_FR&apos;</span>, () =&gt; {
-    <span class="hljs-string">&apos;hello&apos;</span>.t() <span class="hljs-comment">// Bonjour</span>
-  });
-});
+                                <h1 id="conditional-value">Conditional value</h1>
+<p>Here&apos;s the JSON :</p>
+<pre><code class="lang-json">[{
+  <span class="hljs-string">&quot;$you&quot;</span>: {
+    <span class="hljs-string">&quot;you have&quot;</span>: <span class="hljs-string">&quot;you have&quot;</span>
+  },
+  <span class="hljs-string">&quot;$you nb message&quot;</span>: <span class="hljs-string">&quot;{1} %d message%p&quot;</span>,
+  <span class="hljs-string">&quot;$you no message&quot;</span>: <span class="hljs-string">&quot;{1} no message&quot;</span>
+},
+{
+    <span class="hljs-string">&quot;plurial&quot;</span>: {
+            <span class="hljs-string">&quot;p&quot;</span>: [<span class="hljs-string">&quot;s&quot;</span>]
+      }
+}]
 </code></pre>
-<h2 id="with-packages">With packages</h2>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> fr_FR = [
-  {
-    <span class="hljs-string">&quot;hello&quot;</span>: <span class="hljs-string">&quot;bonjour&quot;</span>
-  },
-  {}
-]
-<span class="hljs-keyword">const</span> en_EN =  [
-  {
-    <span class="hljs-string">&quot;hello&quot;</span>: <span class="hljs-string">&quot;hello&quot;</span>
-  },
-  {}
-]
+<p>You can use a condition to display one&apos;s self according to the value of a boolean :</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> nbMsg = <span class="hljs-number">3</span>
+<span class="hljs-string">&apos;you have nb message | you have no message&apos;</span>.t(nbMsg&gt;<span class="hljs-number">0</span>, nbMsg) <span class="hljs-comment">// You have 3 messages</span>
 
-Languages.packages({ fr_FR, en_EN }).default(<span class="hljs-string">&apos;en_EN&apos;</span>)
-<span class="hljs-string">&apos;hello&apos;</span>.t() <span class="hljs-comment">// &apos;Hello&apos;</span>
-Languages.set(<span class="hljs-string">&apos;fr_FR&apos;</span>)
-<span class="hljs-string">&apos;hello&apos;</span>.t() <span class="hljs-comment">// &apos;Bonjour&apos;</span>
+nbMsg = <span class="hljs-number">0</span>
+<span class="hljs-string">&apos;you have nb message | you have no message&apos;</span>.t(nbMsg&gt;<span class="hljs-number">0</span>, nbMsg) <span class="hljs-comment">// You have no message</span>
+</code></pre>
+<p>If the parameter is true, it will take the first identifier (separated by <code>|</code>). Otherwise, it takes the second.
+The above expression plus being simplified:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> nbMsg = <span class="hljs-number">3</span>
+<span class="hljs-string">&apos;you have (nb message | no message)&apos;</span>.t(nbMsg&gt;<span class="hljs-number">0</span>, nbMsg) <span class="hljs-comment">// You have 3 messages</span>
 </code></pre>
 
                                 
@@ -386,12 +398,12 @@ Languages.set(<span class="hljs-string">&apos;fr_FR&apos;</span>)
 
             
                 
-                <a href="packages.html" class="navigation navigation-prev " aria-label="Previous page: Using an object directly">
+                <a href="group.html" class="navigation navigation-prev " aria-label="Previous page: Group">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="angularjs.html" class="navigation navigation-next " aria-label="Next page: AngularJS">
+                <a href="add.html" class="navigation navigation-next " aria-label="Next page: Concatenate">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -402,7 +414,7 @@ Languages.set(<span class="hljs-string">&apos;fr_FR&apos;</span>)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Change the language","level":"3.3","depth":1,"next":{"title":"AngularJS","level":"4.1","depth":1,"path":"docs/angularjs.md","ref":"docs/angularjs.md","articles":[]},"previous":{"title":"Using an object directly","level":"3.2","depth":1,"path":"docs/packages.md","ref":"docs/packages.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/set.md","mtime":"2017-01-11T08:14:21.249Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-11T13:50:54.803Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Condition","level":"2.5","depth":1,"next":{"title":"Concatenate","level":"2.6","depth":1,"path":"docs/add.md","ref":"docs/add.md","articles":[]},"previous":{"title":"Group","level":"2.4","depth":1,"path":"docs/group.md","ref":"docs/group.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/condition.md","mtime":"2017-01-10T16:47:22.572Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-13T11:03:06.199Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
