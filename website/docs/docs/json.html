@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Condition · GitBook</title>
+        <title>Create a JSON language · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="add.html" />
+    <link rel="next" href="plurial.html" />
     
     
-    <link rel="prev" href="group.html" />
+    <link rel="prev" href="../" />
     
 
     </head>
@@ -109,7 +109,7 @@
         
         
     
-        <li class="chapter " data-level="2.1" data-path="json.html">
+        <li class="chapter active" data-level="2.1" data-path="json.html">
             
                 <a href="json.html">
             
@@ -161,7 +161,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.5" data-path="condition.html">
+        <li class="chapter " data-level="2.5" data-path="condition.html">
             
                 <a href="condition.html">
             
@@ -236,7 +236,7 @@
 
     
         
-        <li class="header">3third party integration</li>
+        <li class="header">Third party integration</li>
         
         
     
@@ -245,7 +245,7 @@
                 <a href="angularjs.html">
             
                     
-                    AngularJS
+                    AngularJS 1
             
                 </a>
             
@@ -253,7 +253,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="handlebars.html">
+        <li class="chapter " data-level="4.2" data-path="vue.html">
+            
+                <a href="vue.html">
+            
+                    
+                    VueJS 2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="handlebars.html">
             
                 <a href="handlebars.html">
             
@@ -316,7 +329,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Condition</a>
+        <a href=".." >Create a JSON language</a>
     </h1>
 </div>
 
@@ -331,33 +344,29 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="conditional-value">Conditional value</h1>
-<p>Here&apos;s the JSON :</p>
+                                <h2 id="create-a-json-language">Create a JSON language</h2>
+<p>The files must be defined in the <code>path</code> folder in <code>init()</code> method. The file name must be the identifier defined in the method <code>init()</code>. If possible, use the same name as the identifier of the browser (<code>navigator.language</code>)</p>
+<p>Example : <code>languages/fr_FR.json</code>, <code>languages/en_EN.json</code>, <code>languages/en_US.json</code>, etc.</p>
+<p>JSON file must have the following format:</p>
 <pre><code class="lang-json">[{
-  <span class="hljs-string">&quot;$you&quot;</span>: {
-    <span class="hljs-string">&quot;you have&quot;</span>: <span class="hljs-string">&quot;you have&quot;</span>
-  },
-  <span class="hljs-string">&quot;$you nb message&quot;</span>: <span class="hljs-string">&quot;{1} %d message%p&quot;</span>,
-  <span class="hljs-string">&quot;$you no message&quot;</span>: <span class="hljs-string">&quot;{1} no message&quot;</span>
+    <span class="hljs-string">&quot;ID&quot;</span>: <span class="hljs-string">&quot;text&quot;</span>
 },
 {
-    <span class="hljs-string">&quot;plurial&quot;</span>: {
-            <span class="hljs-string">&quot;p&quot;</span>: [<span class="hljs-string">&quot;s&quot;</span>]
-      }
+    <span class="hljs-string">&quot;config&quot;</span>: {}
 }]
 </code></pre>
-<p>You can use a condition to display one&apos;s self according to the value of a boolean :</p>
-<pre><code class="lang-js"><span class="hljs-keyword">let</span> nbMsg = <span class="hljs-number">3</span>
-<span class="hljs-string">&apos;you have nb message | you have no message&apos;</span>.t(nbMsg&gt;<span class="hljs-number">0</span>, nbMsg) <span class="hljs-comment">// You have 3 messages</span>
+<p>The first entry in the table contains the identifiers with texts. The second contains the configuration values &#x200B;&#x200B;as the plural.</p>
+<p>Example :</p>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-string">&quot;hello&quot;</span>: <span class="hljs-string">&quot;hello&quot;</span>
+  },
+  {
 
-nbMsg = <span class="hljs-number">0</span>
-<span class="hljs-string">&apos;you have nb message | you have no message&apos;</span>.t(nbMsg&gt;<span class="hljs-number">0</span>, nbMsg) <span class="hljs-comment">// You have no message</span>
+  }
+]
 </code></pre>
-<p>If the parameter is true, it will take the first identifier (separated by <code>|</code>). Otherwise, it takes the second.
-The above expression plus being simplified:</p>
-<pre><code class="lang-js"><span class="hljs-keyword">let</span> nbMsg = <span class="hljs-number">3</span>
-<span class="hljs-string">&apos;you have (nb message | no message)&apos;</span>.t(nbMsg&gt;<span class="hljs-number">0</span>, nbMsg) <span class="hljs-comment">// You have 3 messages</span>
-</code></pre>
+<p>With the above example, in the code, <code>&quot;hello&quot;.t()</code> returns <code>Hello</code> (with a capital letter)</p>
 
                                 
                                 </section>
@@ -385,12 +394,12 @@ The above expression plus being simplified:</p>
 
             
                 
-                <a href="group.html" class="navigation navigation-prev " aria-label="Previous page: Group">
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: Get started">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="add.html" class="navigation navigation-next " aria-label="Next page: Concatenate">
+                <a href="plurial.html" class="navigation navigation-next " aria-label="Next page: Plurial">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -401,7 +410,7 @@ The above expression plus being simplified:</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Condition","level":"2.5","depth":1,"next":{"title":"Concatenate","level":"2.6","depth":1,"path":"docs/add.md","ref":"docs/add.md","articles":[]},"previous":{"title":"Group","level":"2.4","depth":1,"path":"docs/group.md","ref":"docs/group.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/condition.md","mtime":"2017-01-10T16:47:22.572Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-11T13:50:54.803Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Create a JSON language","level":"2.1","depth":1,"next":{"title":"Plurial","level":"2.2","depth":1,"path":"docs/plurial.md","ref":"docs/plurial.md","articles":[]},"previous":{"title":"Get started","level":"1.1","depth":1,"path":"readme.md","ref":"readme.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/json.md","mtime":"2017-01-10T16:10:32.680Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-13T11:03:06.199Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

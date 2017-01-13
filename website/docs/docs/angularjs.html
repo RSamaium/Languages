@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Handlebars · GitBook</title>
+        <title>AngularJS 1 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="dev.html" />
+    <link rel="next" href="vue.html" />
     
     
-    <link rel="prev" href="angularjs.html" />
+    <link rel="prev" href="set.html" />
     
 
     </head>
@@ -236,16 +236,16 @@
 
     
         
-        <li class="header">3third party integration</li>
+        <li class="header">Third party integration</li>
         
         
     
-        <li class="chapter " data-level="4.1" data-path="angularjs.html">
+        <li class="chapter active" data-level="4.1" data-path="angularjs.html">
             
                 <a href="angularjs.html">
             
                     
-                    AngularJS
+                    AngularJS 1
             
                 </a>
             
@@ -253,7 +253,20 @@
             
         </li>
     
-        <li class="chapter active" data-level="4.2" data-path="handlebars.html">
+        <li class="chapter " data-level="4.2" data-path="vue.html">
+            
+                <a href="vue.html">
+            
+                    
+                    VueJS 2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="handlebars.html">
             
                 <a href="handlebars.html">
             
@@ -316,7 +329,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Handlebars</a>
+        <a href=".." >AngularJS 1</a>
     </h1>
 </div>
 
@@ -331,32 +344,32 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="handlebars">Handlebars</h1>
-<h2 id="browser">Browser</h2>
-<p>Use directly in a template :</p>
-<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;entry-template&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/x-handlebars-template&quot;</span>&gt;</span><span class="handlebars"><span class="xml">
-  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span></span><span class="hljs-template-variable">{{t &quot;hello&quot;}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-</span></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+                                <h1 id="angularjs-1">AngularJS 1</h1>
+<ol>
+<li>Add module to application :</li>
+</ol>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> app = angular.module(<span class="hljs-string">&apos;app&apos;</span>, [<span class="hljs-string">&apos;Languages&apos;</span>])
 </code></pre>
+<ol>
+<li>Initialize the language in the config method</li>
+</ol>
 <pre><code class="lang-js">Languages.init(<span class="hljs-string">&apos;fr_FR&apos;</span>, <span class="hljs-string">&apos;./languages/&apos;</span>, () =&gt; {
-  <span class="hljs-keyword">var</span> source   = $(<span class="hljs-string">&quot;#entry-template&quot;</span>).html();
-  <span class="hljs-keyword">var</span> template = Handlebars.compile(source)
+  angular.bootstrap(<span class="hljs-built_in">document</span>, [<span class="hljs-string">&apos;app&apos;</span>]);
+});
+</code></pre>
+<ol>
+<li>Using filters in templates :</li>
+</ol>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{&apos;hello&apos; | t}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</code></pre>
+<p>You can use the settings :</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{&apos;you have nb message&apos; | t:2}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</code></pre>
+<h2 id="use-service">Use service</h2>
+<p>You can access Language with Injection Dependency :</p>
+<pre><code class="lang-js">app.controller(<span class="hljs-string">&apos;MyController&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">Languages</span>) </span>{
+  Languages.translate(<span class="hljs-string">&apos;hello&apos;</span>);
 })
-</code></pre>
-<h2 id="nodejs">NodeJS</h2>
-<p>With Express-hbs module :</p>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> hbs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;express-hbs&apos;</span>)
-<span class="hljs-keyword">const</span> Languages = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;languages-js&quot;</span>)
-
-Languages.init(<span class="hljs-string">&apos;fr_FR&apos;</span>, <span class="hljs-string">&apos;./languages/&apos;</span>) <span class="hljs-comment">// sync</span>
-Languages.load.Handlebars(hbs)
-</code></pre>
-<h2 id="use-settings">Use settings</h2>
-<p>Example 1 :</p>
-<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{t &quot;NB_MSG&quot; nb=2}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-</code></pre>
-<p>Example 2 :</p>
-<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{t &quot;you have (nb message | no message)&quot; nb=1 if=true}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 </code></pre>
 
                                 
@@ -385,12 +398,12 @@ Languages.load.Handlebars(hbs)
 
             
                 
-                <a href="angularjs.html" class="navigation navigation-prev " aria-label="Previous page: AngularJS">
+                <a href="set.html" class="navigation navigation-prev " aria-label="Previous page: Change the language">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="dev.html" class="navigation navigation-next " aria-label="Next page: Development">
+                <a href="vue.html" class="navigation navigation-next " aria-label="Next page: VueJS 2">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -401,7 +414,7 @@ Languages.load.Handlebars(hbs)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Handlebars","level":"4.2","depth":1,"next":{"title":"Development","level":"5.1","depth":1,"path":"docs/dev.md","ref":"docs/dev.md","articles":[]},"previous":{"title":"AngularJS","level":"4.1","depth":1,"path":"docs/angularjs.md","ref":"docs/angularjs.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/handlebars.md","mtime":"2017-01-10T16:05:47.660Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-11T13:50:54.803Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"AngularJS 1","level":"4.1","depth":1,"next":{"title":"VueJS 2","level":"4.2","depth":1,"path":"docs/vue.md","ref":"docs/vue.md","articles":[]},"previous":{"title":"Change the language","level":"3.3","depth":1,"path":"docs/set.md","ref":"docs/set.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/angularjs.md","mtime":"2017-01-10T15:56:50.588Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-13T11:03:06.199Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

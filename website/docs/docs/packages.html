@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Create a JSON language · GitBook</title>
+        <title>Using an object directly · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="plurial.html" />
+    <link rel="next" href="set.html" />
     
     
-    <link rel="prev" href="../" />
+    <link rel="prev" href="namespace.html" />
     
 
     </head>
@@ -109,7 +109,7 @@
         
         
     
-        <li class="chapter active" data-level="2.1" data-path="json.html">
+        <li class="chapter " data-level="2.1" data-path="json.html">
             
                 <a href="json.html">
             
@@ -207,7 +207,7 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="packages.html">
+        <li class="chapter active" data-level="3.2" data-path="packages.html">
             
                 <a href="packages.html">
             
@@ -236,7 +236,7 @@
 
     
         
-        <li class="header">3third party integration</li>
+        <li class="header">Third party integration</li>
         
         
     
@@ -245,7 +245,7 @@
                 <a href="angularjs.html">
             
                     
-                    AngularJS
+                    AngularJS 1
             
                 </a>
             
@@ -253,7 +253,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="handlebars.html">
+        <li class="chapter " data-level="4.2" data-path="vue.html">
+            
+                <a href="vue.html">
+            
+                    
+                    VueJS 2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="handlebars.html">
             
                 <a href="handlebars.html">
             
@@ -316,7 +329,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Create a JSON language</a>
+        <a href=".." >Using an object directly</a>
     </h1>
 </div>
 
@@ -331,29 +344,33 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="create-a-json-language">Create a JSON language</h2>
-<p>The files must be defined in the <code>path</code> folder in <code>init()</code> method. The file name must be the identifier defined in the method <code>init()</code>. If possible, use the same name as the identifier of the browser (<code>navigator.language</code>)</p>
-<p>Example : <code>languages/fr_FR.json</code>, <code>languages/en_EN.json</code>, <code>languages/en_US.json</code>, etc.</p>
-<p>JSON file must have the following format:</p>
-<pre><code class="lang-json">[{
-    <span class="hljs-string">&quot;ID&quot;</span>: <span class="hljs-string">&quot;text&quot;</span>
-},
-{
-    <span class="hljs-string">&quot;config&quot;</span>: {}
-}]
-</code></pre>
-<p>The first entry in the table contains the identifiers with texts. The second contains the configuration values &#x200B;&#x200B;as the plural.</p>
-<p>Example :</p>
-<pre><code class="lang-json">[
+                                <h1 id="using-an-object-directly">Using an object directly</h1>
+<p>Instead of searching the JSON in a file, you can directly assign objects with the <code>packages()</code> method. You then set the default language with <code>default()</code></p>
+<h2 id="browser">Browser</h2>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> fr_FR = [
+  {
+    <span class="hljs-string">&quot;hello&quot;</span>: <span class="hljs-string">&quot;bonjour&quot;</span>
+  },
+  {}
+]
+<span class="hljs-keyword">const</span> en_EN =  [
   {
     <span class="hljs-string">&quot;hello&quot;</span>: <span class="hljs-string">&quot;hello&quot;</span>
   },
-  {
-
-  }
+  {}
 ]
+
+Languages.packages({ fr_FR, en_EN }).default(<span class="hljs-string">&apos;en_EN&apos;</span>)
+<span class="hljs-string">&apos;hello&apos;</span>.t() <span class="hljs-comment">// &apos;Hello&apos;</span>
 </code></pre>
-<p>With the above example, in the code, <code>&quot;hello&quot;.t()</code> returns <code>Hello</code> (with a capital letter)</p>
+<p><a href="https://jsfiddle.net/2vu4531f/" target="_blank">Test Code</a></p>
+<h2 id="nodejs">NodeJS</h2>
+<p>With NodeJS, you can recover the JSON with <code>require()</code></p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> fr_FR = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./languages/fr_FR.json&apos;</span>)
+<span class="hljs-keyword">const</span> en_EN = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./languages/en_EN.json&apos;</span>)
+
+Languages.packages({ fr_FR, en_EN }).default(<span class="hljs-string">&apos;en_EN&apos;</span>)
+</code></pre>
 
                                 
                                 </section>
@@ -381,12 +398,12 @@
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: Get started">
+                <a href="namespace.html" class="navigation navigation-prev " aria-label="Previous page: Namespace">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="plurial.html" class="navigation navigation-next " aria-label="Next page: Plurial">
+                <a href="set.html" class="navigation navigation-next " aria-label="Next page: Change the language">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -397,7 +414,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Create a JSON language","level":"2.1","depth":1,"next":{"title":"Plurial","level":"2.2","depth":1,"path":"docs/plurial.md","ref":"docs/plurial.md","articles":[]},"previous":{"title":"Get started","level":"1.1","depth":1,"path":"readme.md","ref":"readme.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/json.md","mtime":"2017-01-10T16:10:32.680Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-11T13:50:54.803Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Using an object directly","level":"3.2","depth":1,"next":{"title":"Change the language","level":"3.3","depth":1,"path":"docs/set.md","ref":"docs/set.md","articles":[]},"previous":{"title":"Namespace","level":"3.1","depth":1,"path":"docs/namespace.md","ref":"docs/namespace.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/packages.md","mtime":"2017-01-11T11:18:45.817Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-13T11:03:06.199Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

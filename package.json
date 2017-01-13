@@ -1,13 +1,13 @@
 {
   "name": "languages-js",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "Translation system in Javascript with the JSON format.",
   "main": "src/languages.js",
   "scripts": {
     "test": "mocha --timeout 0 ./tests/*.spec.js",
     "build": "webpack",
-    "docs": "gitbook build",
-    "deploy": "gh-pages -d _book",
+    "docs": "gitbook build ./ ./website/docs",
+    "deploy": "gh-pages -d website",
     "postpublish": "yarn publish"
   },
   "repository": {

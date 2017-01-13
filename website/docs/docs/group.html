@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Pattern · GitBook</title>
+        <title>Group · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="group.html" />
+    <link rel="next" href="condition.html" />
     
     
-    <link rel="prev" href="plurial.html" />
+    <link rel="prev" href="pattern.html" />
     
 
     </head>
@@ -135,7 +135,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.3" data-path="pattern.html">
+        <li class="chapter " data-level="2.3" data-path="pattern.html">
             
                 <a href="pattern.html">
             
@@ -148,7 +148,7 @@
             
         </li>
     
-        <li class="chapter " data-level="2.4" data-path="group.html">
+        <li class="chapter active" data-level="2.4" data-path="group.html">
             
                 <a href="group.html">
             
@@ -236,7 +236,7 @@
 
     
         
-        <li class="header">3third party integration</li>
+        <li class="header">Third party integration</li>
         
         
     
@@ -245,7 +245,7 @@
                 <a href="angularjs.html">
             
                     
-                    AngularJS
+                    AngularJS 1
             
                 </a>
             
@@ -253,7 +253,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="handlebars.html">
+        <li class="chapter " data-level="4.2" data-path="vue.html">
+            
+                <a href="vue.html">
+            
+                    
+                    VueJS 2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="handlebars.html">
             
                 <a href="handlebars.html">
             
@@ -316,7 +329,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Pattern</a>
+        <a href=".." >Group</a>
     </h1>
 </div>
 
@@ -331,11 +344,15 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="pattern">Pattern</h1>
-<p>If a word is found several times, it is not useful to rewrite it more times. In this case, we use the re-use of a word with curly braces</p>
+                                <h1 id="group">Group</h1>
+<p>You can group translations in the JSON :</p>
 <pre><code class="lang-json">[{
-    <span class="hljs-string">&quot;remember&quot;</span>: <span class="hljs-string">&quot;remember&quot;</span>,
-    <span class="hljs-string">&quot;remember me&quot;</span>: <span class="hljs-string">&quot;{1} me&quot;</span>
+    <span class="hljs-string">&quot;you have nb $objects&quot;</span>: <span class="hljs-string">&quot;you have %d {4}&quot;</span>,
+    <span class="hljs-string">&quot;$objects&quot;</span>: {
+        <span class="hljs-string">&quot;image&quot;</span>: <span class="hljs-string">&quot;image%p&quot;</span>,
+        <span class="hljs-string">&quot;file&quot;</span>: <span class="hljs-string">&quot;file%p&quot;</span>,
+        <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;message%p&quot;</span>
+    }
 },
 {
     <span class="hljs-string">&quot;plurial&quot;</span>: {
@@ -343,21 +360,45 @@
       }
 }]
 </code></pre>
-<p> The <code>1</code> between brace allows to recover <code>remember</code> located in first position in the key.</p>
-<p> It is possible to use the parameters :</p>
-<pre><code class="lang-json"> [{
-     <span class="hljs-string">&quot;your&quot;</span>: <span class="hljs-string">&quot;your&quot;</span>,
-     <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;message%p&quot;</span>,
-     <span class="hljs-string">&quot;your nb message&quot;</span>: <span class="hljs-string">&quot;{1} %d {3} !&quot;</span>
- },
- {
-     <span class="hljs-string">&quot;plurial&quot;</span>: {
-             <span class="hljs-string">&quot;p&quot;</span>: [<span class="hljs-string">&quot;s&quot;</span>]
-       }
- }]
+<p>A group starts with a <code>$</code>. Here, the name is <code>$objects</code>. It contains 3 words that can be in the plural.Thus, we can make 3 combinations:</p>
+<ul>
+<li>you have %d image%p</li>
+<li>you have %d file%p</li>
+<li>you have %d message%p</li>
+</ul>
+<p>In Js :</p>
+<pre><code class="lang-js"><span class="hljs-string">&apos;you have nb image&apos;</span>.t(<span class="hljs-number">1</span>); <span class="hljs-comment">// You have 1 image</span>
+<span class="hljs-string">&apos;you have nb file&apos;</span>.t(<span class="hljs-number">2</span>); <span class="hljs-comment">// You have 2 files</span>
+<span class="hljs-string">&apos;you have nb message&apos;</span>.t(<span class="hljs-number">3</span>); <span class="hljs-comment">// You have 3 messages</span>
 </code></pre>
-<p> In Js :</p>
-<pre><code class="lang-js"> <span class="hljs-string">&apos;your nb message&apos;</span>.t(<span class="hljs-number">2</span>); <span class="hljs-comment">// Your 2 messages</span>
+<p>You can also use only the word present in the group</p>
+<pre><code class="lang-js"><span class="hljs-string">&apos;image&apos;</span>.t(<span class="hljs-number">1</span>); <span class="hljs-comment">// Image</span>
+<span class="hljs-string">&apos;file&apos;</span>.t(<span class="hljs-number">2</span>); <span class="hljs-comment">// Files</span>
+<span class="hljs-string">&apos;message&apos;</span>.t(<span class="hljs-number">3</span>); <span class="hljs-comment">// Messages</span>
+</code></pre>
+<h2 id="combining-groups">Combining groups</h2>
+<pre><code class="lang-json">[{
+    <span class="hljs-string">&quot;$verbs&quot;</span>: {
+      <span class="hljs-string">&quot;add&quot;</span>: <span class="hljs-string">&quot;add&quot;</span>,
+      <span class="hljs-string">&quot;remove&quot;</span>: <span class="hljs-string">&quot;remove&quot;</span>
+    },
+    <span class="hljs-string">&quot;$objects&quot;</span>: {
+        <span class="hljs-string">&quot;image&quot;</span>: <span class="hljs-string">&quot;image%p&quot;</span>,
+        <span class="hljs-string">&quot;file&quot;</span>: <span class="hljs-string">&quot;file%p&quot;</span>
+    },
+    <span class="hljs-string">&quot;$verbs $objects&quot;</span>: <span class="hljs-string">&quot;{1} {2}&quot;</span>
+},
+{
+    <span class="hljs-string">&quot;plurial&quot;</span>: {
+            <span class="hljs-string">&quot;p&quot;</span>: [<span class="hljs-string">&quot;s&quot;</span>]
+      }
+}]
+</code></pre>
+<p>In JS :</p>
+<pre><code class="lang-js"><span class="hljs-string">&apos;add image&apos;</span>.t(); <span class="hljs-comment">// Add image</span>
+<span class="hljs-string">&apos;remove image&apos;</span>.t(); <span class="hljs-comment">// Remove image</span>
+<span class="hljs-string">&apos;add file&apos;</span>.t(); <span class="hljs-comment">// Add file</span>
+<span class="hljs-string">&apos;remove file&apos;</span>.t(<span class="hljs-number">2</span>); <span class="hljs-comment">// Remove files</span>
 </code></pre>
 
                                 
@@ -386,12 +427,12 @@
 
             
                 
-                <a href="plurial.html" class="navigation navigation-prev " aria-label="Previous page: Plurial">
+                <a href="pattern.html" class="navigation navigation-prev " aria-label="Previous page: Pattern">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="group.html" class="navigation navigation-next " aria-label="Next page: Group">
+                <a href="condition.html" class="navigation navigation-next " aria-label="Next page: Condition">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -402,7 +443,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Pattern","level":"2.3","depth":1,"next":{"title":"Group","level":"2.4","depth":1,"path":"docs/group.md","ref":"docs/group.md","articles":[]},"previous":{"title":"Plurial","level":"2.2","depth":1,"path":"docs/plurial.md","ref":"docs/plurial.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/pattern.md","mtime":"2017-01-10T16:37:36.844Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-11T13:50:54.803Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Group","level":"2.4","depth":1,"next":{"title":"Condition","level":"2.5","depth":1,"path":"docs/condition.md","ref":"docs/condition.md","articles":[]},"previous":{"title":"Pattern","level":"2.3","depth":1,"path":"docs/pattern.md","ref":"docs/pattern.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/group.md","mtime":"2017-01-10T16:40:59.100Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-13T11:03:06.199Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

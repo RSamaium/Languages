@@ -1,6 +1,6 @@
 # i18n and l10n : Languages.js
 
-Version 2.0.x
+Version 2.1.x
 
 ## Description
 

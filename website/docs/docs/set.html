@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Development · GitBook</title>
+        <title>Change the language · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="angularjs.html" />
     
-    <link rel="prev" href="handlebars.html" />
+    
+    <link rel="prev" href="packages.html" />
     
 
     </head>
@@ -218,7 +220,7 @@
             
         </li>
     
-        <li class="chapter " data-level="3.3" data-path="set.html">
+        <li class="chapter active" data-level="3.3" data-path="set.html">
             
                 <a href="set.html">
             
@@ -234,7 +236,7 @@
 
     
         
-        <li class="header">3third party integration</li>
+        <li class="header">Third party integration</li>
         
         
     
@@ -243,7 +245,7 @@
                 <a href="angularjs.html">
             
                     
-                    AngularJS
+                    AngularJS 1
             
                 </a>
             
@@ -251,7 +253,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="handlebars.html">
+        <li class="chapter " data-level="4.2" data-path="vue.html">
+            
+                <a href="vue.html">
+            
+                    
+                    VueJS 2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="handlebars.html">
             
                 <a href="handlebars.html">
             
@@ -271,7 +286,7 @@
         
         
     
-        <li class="chapter active" data-level="5.1" data-path="dev.html">
+        <li class="chapter " data-level="5.1" data-path="dev.html">
             
                 <a href="dev.html">
             
@@ -314,7 +329,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Development</a>
+        <a href=".." >Change the language</a>
     </h1>
 </div>
 
@@ -329,19 +344,34 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="development">Development</h1>
-<p>To develop <code>languages.js</code> :</p>
-<h2 id="installation">Installation</h2>
-<p><code>npm install -g webpack mocha gitbook</code>
-<code>npm install</code></p>
-<h2 id="unit-tests">Unit Tests</h2>
-<p><code>npm test</code></p>
-<h2 id="minify-languagesjs">Minify languages.js</h2>
-<p><code>npm run build</code></p>
-<h2 id="generate-documentation">Generate documentation</h2>
-<p><code>npm run docs</code></p>
-<h2 id="deploy-documentation">Deploy documentation</h2>
-<p><code>npm run deploy</code></p>
+                                <h1 id="change-the-language">Change the language</h1>
+<p>You can change the language with the <code>set()</code> method. Think, however, of initializing languages :</p>
+<pre><code class="lang-js">Languages.init([<span class="hljs-string">&apos;en_EN&apos;</span>, <span class="hljs-string">&apos;fr_FR&apos;</span>], <span class="hljs-string">&apos;languages/&apos;</span>, () =&gt; {
+    <span class="hljs-string">&apos;hello&apos;</span>.t() <span class="hljs-comment">// Hello</span>
+  Languages.set(<span class="hljs-string">&apos;fr_FR&apos;</span>, () =&gt; {
+    <span class="hljs-string">&apos;hello&apos;</span>.t() <span class="hljs-comment">// Bonjour</span>
+  });
+});
+</code></pre>
+<h2 id="with-packages">With packages</h2>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> fr_FR = [
+  {
+    <span class="hljs-string">&quot;hello&quot;</span>: <span class="hljs-string">&quot;bonjour&quot;</span>
+  },
+  {}
+]
+<span class="hljs-keyword">const</span> en_EN =  [
+  {
+    <span class="hljs-string">&quot;hello&quot;</span>: <span class="hljs-string">&quot;hello&quot;</span>
+  },
+  {}
+]
+
+Languages.packages({ fr_FR, en_EN }).default(<span class="hljs-string">&apos;en_EN&apos;</span>)
+<span class="hljs-string">&apos;hello&apos;</span>.t() <span class="hljs-comment">// &apos;Hello&apos;</span>
+Languages.set(<span class="hljs-string">&apos;fr_FR&apos;</span>)
+<span class="hljs-string">&apos;hello&apos;</span>.t() <span class="hljs-comment">// &apos;Bonjour&apos;</span>
+</code></pre>
 
                                 
                                 </section>
@@ -369,10 +399,14 @@
 
             
                 
-                <a href="handlebars.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Handlebars">
+                <a href="packages.html" class="navigation navigation-prev " aria-label="Previous page: Using an object directly">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="angularjs.html" class="navigation navigation-next " aria-label="Next page: AngularJS 1">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -381,7 +415,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Development","level":"5.1","depth":1,"previous":{"title":"Handlebars","level":"4.2","depth":1,"path":"docs/handlebars.md","ref":"docs/handlebars.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/dev.md","mtime":"2017-01-11T08:26:50.441Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-11T13:50:54.803Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Change the language","level":"3.3","depth":1,"next":{"title":"AngularJS 1","level":"4.1","depth":1,"path":"docs/angularjs.md","ref":"docs/angularjs.md","articles":[]},"previous":{"title":"Using an object directly","level":"3.2","depth":1,"path":"docs/packages.md","ref":"docs/packages.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/set.md","mtime":"2017-01-11T08:14:21.249Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-13T11:03:06.199Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

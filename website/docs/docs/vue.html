@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Group · GitBook</title>
+        <title>VueJS 2 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="condition.html" />
+    <link rel="next" href="handlebars.html" />
     
     
-    <link rel="prev" href="pattern.html" />
+    <link rel="prev" href="angularjs.html" />
     
 
     </head>
@@ -148,7 +148,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.4" data-path="group.html">
+        <li class="chapter " data-level="2.4" data-path="group.html">
             
                 <a href="group.html">
             
@@ -236,7 +236,7 @@
 
     
         
-        <li class="header">3third party integration</li>
+        <li class="header">Third party integration</li>
         
         
     
@@ -245,7 +245,7 @@
                 <a href="angularjs.html">
             
                     
-                    AngularJS
+                    AngularJS 1
             
                 </a>
             
@@ -253,7 +253,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="handlebars.html">
+        <li class="chapter active" data-level="4.2" data-path="vue.html">
+            
+                <a href="vue.html">
+            
+                    
+                    VueJS 2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="handlebars.html">
             
                 <a href="handlebars.html">
             
@@ -316,7 +329,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Group</a>
+        <a href=".." >VueJS 2</a>
     </h1>
 </div>
 
@@ -331,61 +344,67 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="group">Group</h1>
-<p>You can group translations in the JSON :</p>
-<pre><code class="lang-json">[{
-    <span class="hljs-string">&quot;you have nb $objects&quot;</span>: <span class="hljs-string">&quot;you have %d {4}&quot;</span>,
-    <span class="hljs-string">&quot;$objects&quot;</span>: {
-        <span class="hljs-string">&quot;image&quot;</span>: <span class="hljs-string">&quot;image%p&quot;</span>,
-        <span class="hljs-string">&quot;file&quot;</span>: <span class="hljs-string">&quot;file%p&quot;</span>,
-        <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;message%p&quot;</span>
-    }
-},
-{
-    <span class="hljs-string">&quot;plurial&quot;</span>: {
-            <span class="hljs-string">&quot;p&quot;</span>: [<span class="hljs-string">&quot;s&quot;</span>]
-      }
-}]
+                                <h1 id="vuejs">VueJS</h1>
+<p>Languages works with SSR (Server Side Rendering) feature</p>
+<h1 id="browser--use-languagesjs-with-vuejs-">Browser : Use Languages.js with VueJS :</h1>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;path/to/vue.min.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;path/to/languages.min.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre>
-<p>A group starts with a <code>$</code>. Here, the name is <code>$objects</code>. It contains 3 words that can be in the plural.Thus, we can make 3 combinations:</p>
-<ul>
-<li>you have %d image%p</li>
-<li>you have %d file%p</li>
-<li>you have %d message%p</li>
-</ul>
-<p>In Js :</p>
-<pre><code class="lang-js"><span class="hljs-string">&apos;you have nb image&apos;</span>.t(<span class="hljs-number">1</span>); <span class="hljs-comment">// You have 1 image</span>
-<span class="hljs-string">&apos;you have nb file&apos;</span>.t(<span class="hljs-number">2</span>); <span class="hljs-comment">// You have 2 files</span>
-<span class="hljs-string">&apos;you have nb message&apos;</span>.t(<span class="hljs-number">3</span>); <span class="hljs-comment">// You have 3 messages</span>
+<p>and JS :</p>
+<pre><code class="lang-js"><span class="hljs-comment">// use plugin</span>
+<span class="hljs-keyword">var</span> app = <span class="hljs-keyword">new</span> Vue({
+  <span class="hljs-comment">// your component</span>
+})
+
+<span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  Languages.init([<span class="hljs-string">&apos;en_EN&apos;</span>, <span class="hljs-string">&apos;fr_FR&apos;</span>], <span class="hljs-string">&apos;../langs/&apos;</span>, () =&gt; {
+    app.$mount(<span class="hljs-string">&apos;#app&apos;</span>);
+  })
+}
 </code></pre>
-<p>You can also use only the word present in the group</p>
-<pre><code class="lang-js"><span class="hljs-string">&apos;image&apos;</span>.t(<span class="hljs-number">1</span>); <span class="hljs-comment">// Image</span>
-<span class="hljs-string">&apos;file&apos;</span>.t(<span class="hljs-number">2</span>); <span class="hljs-comment">// Files</span>
-<span class="hljs-string">&apos;message&apos;</span>.t(<span class="hljs-number">3</span>); <span class="hljs-comment">// Messages</span>
+<blockquote>
+<p>This code does not work with SSR. See below</p>
+</blockquote>
+<h2 id="when-using-commonjs-via-browserify-or-webpack">When using CommonJS via Browserify or Webpack</h2>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> Vue = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;vue&apos;</span>)
+<span class="hljs-keyword">var</span> Languages = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;languages-js&apos;</span>)
+
+<span class="hljs-keyword">var</span> fr_FR = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./languages/fr_FR.json&apos;</span>)
+<span class="hljs-keyword">var</span> en_EN = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./languages/en_EN.json&apos;</span>)
+<span class="hljs-comment">// etc.</span>
+
+Vue.use(Languages.load.Vue)
+
+Languages .packages({fr_FR, en_EN})
+          .default(<span class="hljs-string">&apos;en_EN&apos;</span>)
 </code></pre>
-<h2 id="combining-groups">Combining groups</h2>
-<pre><code class="lang-json">[{
-    <span class="hljs-string">&quot;$verbs&quot;</span>: {
-      <span class="hljs-string">&quot;add&quot;</span>: <span class="hljs-string">&quot;add&quot;</span>,
-      <span class="hljs-string">&quot;remove&quot;</span>: <span class="hljs-string">&quot;remove&quot;</span>
-    },
-    <span class="hljs-string">&quot;$objects&quot;</span>: {
-        <span class="hljs-string">&quot;image&quot;</span>: <span class="hljs-string">&quot;image%p&quot;</span>,
-        <span class="hljs-string">&quot;file&quot;</span>: <span class="hljs-string">&quot;file%p&quot;</span>
-    },
-    <span class="hljs-string">&quot;$verbs $objects&quot;</span>: <span class="hljs-string">&quot;{1} {2}&quot;</span>
-},
-{
-    <span class="hljs-string">&quot;plurial&quot;</span>: {
-            <span class="hljs-string">&quot;p&quot;</span>: [<span class="hljs-string">&quot;s&quot;</span>]
-      }
-}]
+<p>or with ES6 :</p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;vue&apos;</span>
+<span class="hljs-keyword">import</span> Languages <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;languages-js&apos;</span>
+
+<span class="hljs-keyword">import</span> fr_FR <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./languages/fr_FR.json&apos;</span>
+<span class="hljs-keyword">import</span> en_EN <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./languages/en_EN.json&apos;</span>
+<span class="hljs-comment">// etc.</span>
+
+Vue.use(Languages.load.Vue)
+
+Languages .packages({fr_FR, en_EN})
+          .default(<span class="hljs-string">&apos;en_EN&apos;</span>)
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Languages
 </code></pre>
-<p>In JS :</p>
-<pre><code class="lang-js"><span class="hljs-string">&apos;add image&apos;</span>.t(); <span class="hljs-comment">// Add image</span>
-<span class="hljs-string">&apos;remove image&apos;</span>.t(); <span class="hljs-comment">// Remove image</span>
-<span class="hljs-string">&apos;add file&apos;</span>.t(); <span class="hljs-comment">// Add file</span>
-<span class="hljs-string">&apos;remove file&apos;</span>.t(<span class="hljs-number">2</span>); <span class="hljs-comment">// Remove files</span>
+<h2 id="use-filter">Use filter</h2>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{&apos;hello&apos; | t}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</code></pre>
+<p>You can use the settings :</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{{&apos;you have nb message&apos; | t(2)}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</code></pre>
+<h2 id="languages-instance">Languages instance</h2>
+<p>You can access to <code>Languages</code> instance directly in <code>Vue</code> :</p>
+<pre><code class="lang-js">Vue.Languages
+</code></pre>
+<p>Example :</p>
+<pre><code class="lang-js">Vue.Languages.set(<span class="hljs-string">&apos;fr_FR&apos;</span>)
 </code></pre>
 
                                 
@@ -414,12 +433,12 @@
 
             
                 
-                <a href="pattern.html" class="navigation navigation-prev " aria-label="Previous page: Pattern">
+                <a href="angularjs.html" class="navigation navigation-prev " aria-label="Previous page: AngularJS 1">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="condition.html" class="navigation navigation-next " aria-label="Next page: Condition">
+                <a href="handlebars.html" class="navigation navigation-next " aria-label="Next page: Handlebars">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -430,7 +449,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Group","level":"2.4","depth":1,"next":{"title":"Condition","level":"2.5","depth":1,"path":"docs/condition.md","ref":"docs/condition.md","articles":[]},"previous":{"title":"Pattern","level":"2.3","depth":1,"path":"docs/pattern.md","ref":"docs/pattern.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/group.md","mtime":"2017-01-10T16:40:59.100Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-11T13:50:54.803Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"VueJS 2","level":"4.2","depth":1,"next":{"title":"Handlebars","level":"4.3","depth":1,"path":"docs/handlebars.md","ref":"docs/handlebars.md","articles":[]},"previous":{"title":"AngularJS 1","level":"4.1","depth":1,"path":"docs/angularjs.md","ref":"docs/angularjs.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/vue.md","mtime":"2017-01-12T13:17:39.607Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-13T11:03:06.199Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
