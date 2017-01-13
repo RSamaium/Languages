@@ -16,6 +16,7 @@ https://rsamaium.github.io/Languages
 * Node.js
 * AngularJS
 * Handlebars
+* VueJS 2
 
 ## Get Started
 
