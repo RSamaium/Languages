@@ -7,8 +7,12 @@ window.onload = function() {
 			  activeName: 'first',
 				item: 'message',
 				lang: '',
+				loaded: false,
 				languages: {en_EN: 'English', fr_FR: 'French'}
 			}
+		},
+		created() {
+			this.loaded = true;
 		},
 		computed: {
 			items() {
