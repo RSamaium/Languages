@@ -1,6 +1,6 @@
 # i18n and l10n : Languages.js
 
-Version 2.1.x
+Version 2.2.x
 
 ## Description
 
@@ -16,6 +16,7 @@ https://rsamaium.github.io/Languages
 * Node.js
 * AngularJS
 * Handlebars
+* Pug
 * VueJS 2
 
 ## Get Started
