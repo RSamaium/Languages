@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Concatenate · GitBook</title>
+        <title>Pug · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="namespace.html" />
+    <link rel="next" href="dev.html" />
     
     
-    <link rel="prev" href="condition.html" />
+    <link rel="prev" href="handlebars.html" />
     
 
     </head>
@@ -174,7 +174,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.6" data-path="add.html">
+        <li class="chapter " data-level="2.6" data-path="add.html">
             
                 <a href="add.html">
             
@@ -279,7 +279,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.4" data-path="pug.html">
+        <li class="chapter active" data-level="4.4" data-path="pug.html">
             
                 <a href="pug.html">
             
@@ -342,7 +342,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Concatenate</a>
+        <a href=".." >Pug</a>
     </h1>
 </div>
 
@@ -357,26 +357,63 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="concatenate-messages">concatenate messages</h1>
-<p>It is possible to concatenate messages</p>
-<p>Here&apos;s the JSON :</p>
-<pre><code class="lang-json">[{
-  <span class="hljs-string">&quot;you have&quot;</span>: <span class="hljs-string">&quot;you have&quot;</span>,
-  <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;%d message%p&quot;</span>
-},
-{
-    <span class="hljs-string">&quot;plurial&quot;</span>: {
-            <span class="hljs-string">&quot;p&quot;</span>: [<span class="hljs-string">&quot;s&quot;</span>]
-      }
-}]
+                                <h1 id="pug">Pug</h1>
+<h2 id="render">Render</h2>
+<p>If you use Pug to render :</p>
+<p>You must user <code>filters</code> options (<a href="https://pugjs.org/api/reference.html#options" target="_blank">https://pugjs.org/api/reference.html#options</a>)</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> pug = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;pug&apos;</span>);
+<span class="hljs-keyword">const</span> text = <span class="hljs-string">`p
+  :translate() {{&quot;hello&quot; | t}} Sam`</span>
+
+Languages.init(<span class="hljs-string">&apos;en_EN&apos;</span>) <span class="hljs-comment">// sync</span>
+
+<span class="hljs-keyword">let</span> render = pug.render(text, {
+  filters: {
+    translate: text =&gt; Languages.render(text)
+  }
+});
 </code></pre>
-<p>In JS :</p>
-<pre><code class="lang-js"><span class="hljs-string">&apos;you have + message&apos;</span>.t(<span class="hljs-number">2</span>) <span class="hljs-comment">// You have 2 messages</span>
+<h3 id="shortcut">Shortcut</h3>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> pug = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;pug&apos;</span>);
+<span class="hljs-keyword">const</span> text = <span class="hljs-string">`p
+  :translate() {{&quot;hello&quot; | t}} Sam`</span>
+
+Languages.init(<span class="hljs-string">&apos;en_EN&apos;</span>) <span class="hljs-comment">// sync</span>
+
+<span class="hljs-keyword">let</span> render = pug.render(text, { filters: Languages.load.Pug() });
 </code></pre>
-<p>Use the + symbol to concatenate two messages</p>
-<blockquote>
-<p>Warning, this method can be useful but blocking for the translation of other languages. If the form of the sentence is different in another language, it will be difficult to use this method</p>
-</blockquote>
+<h2 id="using-custom-patterns">Using custom patterns</h2>
+<p>In the <code>render</code> method of Languages, you can use custom patterns :</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> pug = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;pug&apos;</span>);
+<span class="hljs-keyword">const</span> text = <span class="hljs-string">`p
+  :translate() [&quot;hello&quot; - t(1,2)] Sam`</span>
+<span class="hljs-keyword">const</span> customPattern =  {
+  patternStart: <span class="hljs-string">&apos;[&apos;</span>,
+  patternEnd: <span class="hljs-string">&apos;]&apos;</span>,
+  pipe: <span class="hljs-string">&apos;-&apos;</span>,
+  fnStart: <span class="hljs-string">&apos;(&apos;</span>,
+  fnEnd: <span class="hljs-string">&apos;)&apos;</span>,
+  paramsSeparator: <span class="hljs-string">&apos;,&apos;</span>
+}
+
+Languages.init(<span class="hljs-string">&apos;en_EN&apos;</span>) <span class="hljs-comment">// sync</span>
+
+<span class="hljs-keyword">let</span> render = pug.render(text, {
+  filters: {
+    translate: text =&gt; Languages.render(text, customPattern)
+  }
+});
+</code></pre>
+<p>By default :</p>
+<pre><code class="lang-js">{
+  patternStart: <span class="hljs-string">&apos;{{&apos;</span>,
+  patternEnd: <span class="hljs-string">&apos;}}&apos;</span>,
+  pipe: <span class="hljs-string">&apos;|&apos;</span>,
+  fnStart: <span class="hljs-string">&apos;&apos;</span>,
+  fnEnd: <span class="hljs-string">&apos;&apos;</span>,
+  paramsSeparator: <span class="hljs-string">&apos;:&apos;</span>
+}
+</code></pre>
 
                                 
                                 </section>
@@ -404,12 +441,12 @@
 
             
                 
-                <a href="condition.html" class="navigation navigation-prev " aria-label="Previous page: Condition">
+                <a href="handlebars.html" class="navigation navigation-prev " aria-label="Previous page: Handlebars">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="namespace.html" class="navigation navigation-next " aria-label="Next page: Namespace">
+                <a href="dev.html" class="navigation navigation-next " aria-label="Next page: Development">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -420,7 +457,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Concatenate","level":"2.6","depth":1,"next":{"title":"Namespace","level":"3.1","depth":1,"path":"docs/namespace.md","ref":"docs/namespace.md","articles":[]},"previous":{"title":"Condition","level":"2.5","depth":1,"path":"docs/condition.md","ref":"docs/condition.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/add.md","mtime":"2017-01-10T16:52:28.280Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-16T11:32:56.231Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Pug","level":"4.4","depth":1,"next":{"title":"Development","level":"5.1","depth":1,"path":"docs/dev.md","ref":"docs/dev.md","articles":[]},"previous":{"title":"Handlebars","level":"4.3","depth":1,"path":"docs/handlebars.md","ref":"docs/handlebars.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/pug.md","mtime":"2017-01-16T10:30:08.424Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-16T11:32:56.231Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
