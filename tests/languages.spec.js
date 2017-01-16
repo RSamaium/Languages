@@ -1,4 +1,5 @@
 const {expect} = require('chai');
+const pug = require('pug');
 var Languages = require('../src/languages')
 
 describe('Test Language', function() {
@@ -79,6 +80,82 @@ describe('Test Language', function() {
     expect('foo'.t()).to.equal('');
   })
 
+  describe('Compile template and Pug', function() {
+
+    const customPattern =  {
+      patternStart: '[',
+      patternEnd: ']',
+      pipe: '-',
+      fnStart: '(',
+      fnEnd: ')',
+      paramsSeparator: ','
+    }
+
+    it('Simple render', () => {
+      const render = Languages.render('{{hello | t}}')
+      expect(render).to.equal('Hello');
+    })
+
+    it('Simple render with quotation mark', () => {
+      let render = Languages.render('{{"hello" | t}}')
+      expect(render).to.equal('Hello');
+      render = Languages.render('{{\'hello\' | t}}')
+      expect(render).to.equal('Hello');
+    })
+
+    it('Render with 1 parameter', () => {
+      const render = Languages.render('{{new | t:2}}')
+      expect(render).to.equal('News');
+    })
+
+    it('Render with 2 parameters', () => {
+      const render = Languages.render('{{step | t:1:3}}')
+      expect(render).to.equal('Step 1 / 3');
+    })
+
+    it('Render with boolean', () => {
+      const render = Languages.render('{{connection | logout | t:true}}')
+      expect(render).to.equal('Login');
+    })
+
+    it('Render with custom pattern', () => {
+      const render = Languages.render('[hello - t]', customPattern)
+      expect(render).to.equal('Hello');
+    })
+
+    it('Render with custom pattern and 2 parameters', () => {
+      const render = Languages.render('[step - t(1,3)]', customPattern)
+      expect(render).to.equal('Step 1 / 3');
+    })
+
+    const pugRender = `p
+      :translate() {{"hello" | t}} Sam`
+
+    it('Render with Pug', () => {
+      let render = pug.render(pugRender, {
+        filters: {
+          translate: function (text) {
+            return Languages.render(text);
+          }
+        }
+      });
+      expect(render).to.equal('<p>Hello Sam</p>');
+    })
+
+    it('Render with Pug method', () => {
+      let render = pug.render(pugRender, {filters: Languages.load.Pug() });
+      expect(render).to.equal('<p>Hello Sam</p>');
+    })
+
+    it('Render with Pug method and other filters', () => {
+      let render = pug.render(pugRender, {filters: Languages.load.Pug({
+        otherFilter: {}
+      })});
+      expect(render).to.equal('<p>Hello Sam</p>');
+    })
+
+  })
+
   describe('With namespace', function() {
 
     before(done => {
@@ -90,6 +167,7 @@ describe('Test Language', function() {
     })
 
   });
+
 
 
 })

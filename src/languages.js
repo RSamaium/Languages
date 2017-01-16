@@ -298,6 +298,42 @@ var Languages = (function() {
 			return array;
 		}
 
+		render(text, {patternStart='{{', patternEnd='}}', pipe='|', fnStart='', fnEnd='', paramsSeparator=':'}={}) {
+			const escape = pattern => pattern.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")
+			patternStart = escape(patternStart)
+			patternEnd = escape(patternEnd)
+			pipe = escape(pipe)
+			fnStart = escape(fnStart)
+			fnEnd = escape(fnEnd)
+			let escapeParamsSeparator = escape(paramsSeparator)
+			const regexp = new RegExp(`${patternStart}(.*?)${pipe}[ ]*t(${escapeParamsSeparator}?${fnStart}(.*?)${fnEnd})?${patternEnd}`, 'g')
+			text = text.replace(regexp, (match, key, t, params, offset, string) => {
+				key = key.replace(/["']/g, '');
+				key = key.trim()
+				if (params) {
+					params = params.split(paramsSeparator)
+					params = params.map(val => {
+						val = val.trim();
+						if (val >= 0 || val <= 0) {
+							val = +val;
+						}
+						else if (val == 'true') {
+							val = val === 'true'
+						}
+						else if (val == 'false') {
+							val = val === 'false'
+						}
+						return val;
+					})
+				}
+				else {
+					params = []
+				}
+				return this.translate(key, ...params);
+			})
+			return text;
+		}
+
 		getPlurial(val, type, namespace, lang) {
 			namespace = namespace || 'self';
 			lang = lang || this.current;
@@ -376,6 +412,10 @@ var Languages = (function() {
 		            return Handlebars;
 
 		        },
+						Pug(filters={}) {
+							filters.translate = text => self.render(text);
+							return filters
+						},
 		        Angular(angular) {
 		            angular .module("Languages", [])
 		                    .provider("Languages", function() {
