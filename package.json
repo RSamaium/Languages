@@ -1,6 +1,6 @@
 {
   "name": "languages-js",
-  "version": "2.1.3",
+  "version": "2.2.0",
   "description": "Translation system in Javascript with the JSON format.",
   "main": "src/languages.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "build": "webpack",
     "docs": "gitbook build ./ ./website/docs",
     "deploy": "gh-pages -d website",
-    "prepublish": "npm run build && yarn publish"
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
