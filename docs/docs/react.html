@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Pattern · GitBook</title>
+        <title>ReactJS · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="group.html" />
+    <link rel="next" href="handlebars.html" />
     
     
-    <link rel="prev" href="plurial.html" />
+    <link rel="prev" href="vue.html" />
     
 
     </head>
@@ -135,7 +135,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.3" data-path="pattern.html">
+        <li class="chapter " data-level="2.3" data-path="pattern.html">
             
                 <a href="pattern.html">
             
@@ -266,7 +266,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3" data-path="react.html">
+        <li class="chapter active" data-level="4.3" data-path="react.html">
             
                 <a href="react.html">
             
@@ -355,7 +355,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Pattern</a>
+        <a href=".." >ReactJS</a>
     </h1>
 </div>
 
@@ -370,34 +370,27 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="pattern">Pattern</h1>
-<p>If a word is found several times, it is not useful to rewrite it more times. In this case, we use the re-use of a word with curly braces</p>
-<pre><code class="lang-json">[{
-    <span class="hljs-string">&quot;remember&quot;</span>: <span class="hljs-string">&quot;remember&quot;</span>,
-    <span class="hljs-string">&quot;remember me&quot;</span>: <span class="hljs-string">&quot;{1} me&quot;</span>
-},
-{
-    <span class="hljs-string">&quot;plurial&quot;</span>: {
-            <span class="hljs-string">&quot;p&quot;</span>: [<span class="hljs-string">&quot;s&quot;</span>]
-      }
-}]
-</code></pre>
-<p> The <code>1</code> between brace allows to recover <code>remember</code> located in first position in the key.</p>
-<p> It is possible to use the parameters :</p>
-<pre><code class="lang-json"> [{
-     <span class="hljs-string">&quot;your&quot;</span>: <span class="hljs-string">&quot;your&quot;</span>,
-     <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;message%p&quot;</span>,
-     <span class="hljs-string">&quot;your nb message&quot;</span>: <span class="hljs-string">&quot;{1} %d {3} !&quot;</span>
- },
- {
-     <span class="hljs-string">&quot;plurial&quot;</span>: {
-             <span class="hljs-string">&quot;p&quot;</span>: [<span class="hljs-string">&quot;s&quot;</span>]
-       }
- }]
-</code></pre>
-<p> In Js :</p>
-<pre><code class="lang-js"> <span class="hljs-string">&apos;your nb message&apos;</span>.t(<span class="hljs-number">2</span>); <span class="hljs-comment">// Your 2 messages</span>
-</code></pre>
+                                <h1 id="reactjs">ReactJS</h1>
+<p>Using the library with ReactJS is very simple. Just call Javascript in the render :</p>
+<pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Example</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
+  render() {
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{&apos;hello&apos;.t()}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    );
+  }
+}
+
+Languages.init([<span class="hljs-string">&apos;en_EN&apos;</span>, <span class="hljs-string">&apos;fr_FR&apos;</span>], <span class="hljs-string">&apos;./languages/&apos;</span>, () =&gt; {
+  ReactDOM.render(
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Example</span> /&gt;</span>,
+    document.getElementById(&apos;example&apos;)
+  );
+})
+</span></code></pre>
+<p>Example 1 : <a href="https://embed.plnkr.co/VXMrtgm5raGqSAmQ8Fnq/" target="_blank">https://embed.plnkr.co/VXMrtgm5raGqSAmQ8Fnq/</a>
+Example 2 (with select box) : <a href="https://embed.plnkr.co/Fwh0UOb4aBLt3e8xppaE/" target="_blank">https://embed.plnkr.co/Fwh0UOb4aBLt3e8xppaE/</a></p>
 
                                 
                                 </section>
@@ -425,12 +418,12 @@
 
             
                 
-                <a href="plurial.html" class="navigation navigation-prev " aria-label="Previous page: Plurial">
+                <a href="vue.html" class="navigation navigation-prev " aria-label="Previous page: VueJS 2">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="group.html" class="navigation navigation-next " aria-label="Next page: Group">
+                <a href="handlebars.html" class="navigation navigation-next " aria-label="Next page: Handlebars">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -441,7 +434,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Pattern","level":"2.3","depth":1,"next":{"title":"Group","level":"2.4","depth":1,"path":"docs/group.md","ref":"docs/group.md","articles":[]},"previous":{"title":"Plurial","level":"2.2","depth":1,"path":"docs/plurial.md","ref":"docs/plurial.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/pattern.md","mtime":"2017-01-10T16:37:36.844Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-17T13:36:29.620Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ReactJS","level":"4.3","depth":1,"next":{"title":"Handlebars","level":"4.4","depth":1,"path":"docs/handlebars.md","ref":"docs/handlebars.md","articles":[]},"previous":{"title":"VueJS 2","level":"4.2","depth":1,"path":"docs/vue.md","ref":"docs/vue.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/react.md","mtime":"2017-01-17T12:59:43.579Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-17T13:36:29.620Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
