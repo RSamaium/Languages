@@ -1,6 +1,7 @@
 # i18n and l10n : Languages.js
 
 Version 2.2.x
+https://languages.js.org
 
 ## Description
 
@@ -8,7 +9,7 @@ Translation system in Javascript with the JSON format.
 
 ## Fully Documentation
 
-https://rsamaium.github.io/Languages
+https://languages.js.org/docs
 
 ## Works with
 

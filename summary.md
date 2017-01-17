@@ -21,6 +21,7 @@
 
 * [AngularJS 1](docs/angularjs.md)
 * [VueJS 2](docs/vue.md)
+* [ReactJS](docs/react.md)
 * [Handlebars](docs/handlebars.md)
 * [Pug](docs/pug.md)
 

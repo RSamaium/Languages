@@ -20,10 +20,12 @@
     "express",
     "nodejs",
     "vuejs",
+    "angularjs"
     "i18n",
-    "require",
+    "pug",
     "plugins",
-    "plurial"
+    "plurial",
+    "ssr"
   ],
   "author": "WebCreative5, Samuel Ronce",
   "license": "MIT",

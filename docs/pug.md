@@ -11,7 +11,7 @@ const pug = require('pug');
 const text = `p
   :translate() {{"hello" | t}} Sam`
 
-Languages.init('en_EN') // sync
+Languages.init('en_EN', './languages/') // sync
 
 let render = pug.render(text, {
   filters: {
@@ -50,7 +50,7 @@ const customPattern =  {
   paramsSeparator: ','
 }
 
-Languages.init('en_EN') // sync
+Languages.init('en_EN', './languages/') // sync
 
 let render = pug.render(text, {
   filters: {
