@@ -20,7 +20,7 @@
     "express",
     "nodejs",
     "vuejs",
-    "angularjs"
+    "angularjs",
     "i18n",
     "pug",
     "plugins",
