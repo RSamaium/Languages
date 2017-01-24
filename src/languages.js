@@ -75,6 +75,30 @@ var Languages = (function() {
 			return this.init(ids, false, false, options)
 		}
 
+		// NodeJS only
+		all(path, callback, options={}) {
+
+			const _callback = (files) => {
+				let filter = [], ext = /\.json$/;
+				for (let file of files) {
+					if (ext.test(file)) {
+						filter.push(file.replace(ext, ''))
+					}
+				}
+				this.init(filter, path, callback, options)
+			}
+			if (callback) {
+				_callback(fs.readdirSync(path));
+			}
+			else {
+				fs.readdir(path, (err, files) => {
+					if (err) throw err;
+					_callback(files)
+				});
+			}
+
+		}
+
 		init(id, path, callback, options={}) {
 
 			let _path, xhr;
@@ -143,7 +167,9 @@ var Languages = (function() {
 
 			if (fs) {
           if (!callback) {
-              _callback(fs.readFileSync(_path));
+							for (let lang of this._list) {
+              	_callback(fs.readFileSync(path + lang + ".json"), lang, true);
+							}
           }
           else {
 							let index=0;
@@ -298,7 +324,7 @@ var Languages = (function() {
 			return array;
 		}
 
-		render(text, {patternStart='{{', patternEnd='}}', pipe='|', fnStart='', fnEnd='', paramsSeparator=':'}={}) {
+		render(text, {patternStart='{{', patternEnd='}}', pipe='|', fnStart='', fnEnd='', paramsSeparator=':'}={}, language) {
 			const escape = pattern => pattern.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")
 			patternStart = escape(patternStart)
 			patternEnd = escape(patternEnd)
@@ -328,6 +354,9 @@ var Languages = (function() {
 				}
 				else {
 					params = []
+				}
+				if (language) {
+					params = [language, ...params];
 				}
 				return this.translate(key, ...params);
 			})
