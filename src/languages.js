@@ -87,7 +87,7 @@ var Languages = (function() {
 				}
 				this.init(filter, path, callback, options)
 			}
-			if (callback) {
+			if (!callback) {
 				_callback(fs.readdirSync(path));
 			}
 			else {

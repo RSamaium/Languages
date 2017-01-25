@@ -11,6 +11,7 @@
     "signup": "signup",
     "$you already an account ?": "{1} already an account ?",
     "connect": "to connect",
+    "connect help": "connect help",
     "connect now": "{1} now !",
     "login on": "Log in on %s !",
     "welcome": "welcome on %s",
@@ -177,7 +178,9 @@
       "field required": "This field is required",
       "password diff": "The password is not equal to the previous",
       "minimum chars": "It takes minimum %d character%p",
-      "invalid email": "The email is invalid"
+      "invalid email": "The email is invalid",
+      "forgotten password help": "you want to reset your password. By clicking on the link below, you will be redirected to a page to reset your password",
+      "forgotten password": "forgotten password"
     },
 
     "$roles $verbs": "{1} {2}",

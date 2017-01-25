@@ -13,6 +13,11 @@ describe('Test Language', function() {
     expect('hello'.t()).to.equal('Hello');
   })
 
+  it('Connect', () => {
+    expect('connect'.t()).to.equal('To connect');
+    expect('connect help'.t()).to.equal('Connect help');
+  })
+
   it('Local Language', () => {
     expect('hello'.t('fr_FR')).to.equal('Bonjour');
   })
