@@ -332,7 +332,7 @@ var Languages = (function() {
 			fnStart = escape(fnStart)
 			fnEnd = escape(fnEnd)
 			let escapeParamsSeparator = escape(paramsSeparator)
-			const regexp = new RegExp(`${patternStart}(.*?)${pipe}[ ]*t(${escapeParamsSeparator}?${fnStart}(.*?)${fnEnd})?${patternEnd}`, 'g')
+			const regexp = new RegExp(`${patternStart}([^${patternEnd}]+)${pipe}[ ]*t(${escapeParamsSeparator}?${fnStart}([^${patternEnd}]+)${fnEnd})?${patternEnd}`, 'g')
 			text = text.replace(regexp, (match, key, t, params, offset, string) => {
 				key = key.replace(/["']/g, '');
 				key = key.trim()

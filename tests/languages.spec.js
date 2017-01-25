@@ -101,6 +101,11 @@ describe('Test Language', function() {
       expect(render).to.equal('Hello');
     })
 
+    it('Simple render with markups', () => {
+      const render = Languages.render('<p>{{hello | t}}</p><p>{{hello | t}}</p>')
+      expect(render).to.equal('<p>Hello</p><p>Hello</p>');
+    })
+
     it('Simple render with quotation mark', () => {
       let render = Languages.render('{{"hello" | t}}')
       expect(render).to.equal('Hello');
@@ -116,6 +121,11 @@ describe('Test Language', function() {
     it('Render with 2 parameters', () => {
       const render = Languages.render('{{step | t:1:3}}')
       expect(render).to.equal('Step 1 / 3');
+    })
+
+    it('Render with 2 parameters with markups', () => {
+      const render = Languages.render('<p>{{step | t:1:3}}</p><p>{{hello | t}}</p>')
+      expect(render).to.equal('<p>Step 1 / 3</p><p>Hello</p>');
     })
 
     it('Render with boolean', () => {
