@@ -1,11 +1,9 @@
-[{
-
+[
+  {
     "hello": "hello",
-
     "password": "password",
     "password $verbs": "{2} {1}",
     "password forgotten": "{1} forgotten ?",
-
     "connection": "login",
     "logout": "logout",
     "signup": "signup",
@@ -17,14 +15,12 @@
     "welcome": "welcome on %s",
     "thanks and welcome": "Thank you of your inscription and {3}",
     "connect with $platform": "{1} with {3}",
-
     "$you": {
       "you have": "you have"
     },
-
     "$you nb $objects": "{1} %d {3}",
     "$you no $objects": "{1} no {3}",
-
+    
     "$attributes": {
       "email": "email",
       "firstname": "first name",
@@ -36,12 +32,10 @@
       "description": "description",
       "thumb": "thumb"
     },
-
     "all": "all",
     "all $verbs": "{1} {2}",
     "save as": "{1} as",
     "send to": "{1} to",
-
     "$verbs": {
       "repeat": "repeat",
       "confirm": "confirm",
@@ -97,20 +91,16 @@
       "disable": "disable",
       "recommend": "recommend"
     },
-
     "$verbs_past": {
       "modified": "modified"
     },
-
     "$platform": {
       "facebook": "Facebook",
       "gmail": "Gmail"
     },
-
     "$filter": {
-        "recent": "recent"
+      "recent": "recent"
     },
-
     "loading": "loading",
     "new": "new%p",
     "novelty": "novelt%p",
@@ -119,57 +109,50 @@
     "format": "format",
     "status": "status",
     "language": "language",
-
     "my": "my",
     "my $objects": "{1} {2}",
     "drop $objects here": "drop {2} here",
     "loading $objects": "{1} {2}",
-
     "$objects": {
-        "publication": "publication%p",
-        "image": "image%p",
-        "video": "video%p",
-        "file": "file%p",
-        "directory": "director%p1",
-        "folder": "folder%p",
-        "music": "music%p",
-        "friend": "friend%p",
-        "avatar": "avatar%p",
-        "banner": "banner%p",
-        "message": "message%p"
+      "publication": "publication%p",
+      "image": "image%p",
+      "video": "video%p",
+      "file": "file%p",
+      "directory": "director%p1",
+      "folder": "folder%p",
+      "music": "music%p",
+      "friend": "friend%p",
+      "avatar": "avatar%p",
+      "banner": "banner%p",
+      "message": "message%p"
     },
-
     "reset draft": "{1} {2}",
-
     "$states": {
-        "draft": "draft",
-        "private": "private",
-        "public": "public",
-        "protected": "protected",
-        "forbidden": "forbidden",
-        "forbidden access": "forbidden {1}"
+      "draft": "draft",
+      "private": "private",
+      "public": "public",
+      "protected": "protected",
+      "forbidden": "forbidden",
+      "forbidden access": "forbidden {1}"
     },
-
     "parameter modification": "{2} {1}",
     "parameter $verbs": "{2} {1}",
     "$actions save": "{2} {1}",
     "$verbs an account": "{1} {3}",
-
     "$actions": {
-        "profile": "profilze%p",
-        "help": "help",
-        "home": "home",
-        "setting": "home%p",
-        "preference": "preference%p",
-        "parameter": "parameter%p",
-        "account": "account%p",
-        "administration": "administration",
-        "modification": "modification%p",
-        "management": "management",
-        "trash": "trash",
-        "user": "user"
+      "profile": "profilze%p",
+      "help": "help",
+      "home": "home",
+      "setting": "home%p",
+      "preference": "preference%p",
+      "parameter": "parameter%p",
+      "account": "account%p",
+      "administration": "administration",
+      "modification": "modification%p",
+      "management": "management",
+      "trash": "trash",
+      "user": "user"
     },
-
     "$messages": {
       "lost password": "Enter the email address with which you registered. We will send you an email with a link to reset your password",
       "search not found": "Sorry we do not find any results for \"%s\". Check your spelling or try a different search.",
@@ -182,10 +165,8 @@
       "forgotten password help": "you want to reset your password. By clicking on the link below, you will be redirected to a page to reset your password",
       "forgotten password": "forgotten password"
     },
-
     "$roles $verbs": "{1} {2}",
     "role": "role%p",
-
     "$roles": {
       "admin": "administrateur%p",
       "moderator": "moderator%p",
@@ -201,20 +182,23 @@
       "subscriber": "subscriber%p",
       "contributor": "contributor%p"
     },
-
     "title": "title",
     "back": "back",
     "step": "step %d / %d",
     "remember": "remember",
     "remember me": "{1} me",
-
     "update": "update",
     "accept general condition": "i accept the conditions of use"
-
-},
-{
+  },
+  {
     "plurial": {
-        "p": ["s"],
-        "p1": ["ies", "y"]
+      "p": [
+        "s"
+      ],
+      "p1": [
+        "ies",
+        "y"
+      ]
     }
-}]
+  }
+]

@@ -20,16 +20,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-var Languages = (function() {
+var Languages = (function () {
 
 	let fs, instance, isServerSide = false;
 
-	if (typeof(exports) !== "undefined" && typeof(window) === "undefined") {
+	if (typeof (exports) !== "undefined" && typeof (window) === "undefined") {
 		fs = require('fs');
 		isServerSide = true;
 	}
 
-	class Languages  {
+	class Languages {
 
 		constructor() {
 			this.current = "en";
@@ -53,7 +53,7 @@ var Languages = (function() {
 			this.init(id, path, callback, { namespace });
 		}
 
-		packages(languages, options={}) {
+		packages(languages, options = {}) {
 			const namespace = options.namespace || "self";
 			if (!this._cache[namespace]) {
 				this._cache[namespace] = {};
@@ -64,7 +64,7 @@ var Languages = (function() {
 			return this;
 		}
 
-		default(id, options={}) {
+		default(id, options = {}) {
 			const namespace = options.namespace || "self"
 			let ids = []
 			ids.push(id)
@@ -76,7 +76,7 @@ var Languages = (function() {
 		}
 
 		// NodeJS only
-		all(path, callback, options={}) {
+		all(path, callback, options = {}) {
 
 			const _callback = (files) => {
 				let filter = [], ext = /\.json$/;
@@ -99,7 +99,7 @@ var Languages = (function() {
 
 		}
 
-		init(id, path, callback, options={}) {
+		init(id, path, callback, options = {}) {
 
 			let _path, xhr;
 
@@ -124,7 +124,7 @@ var Languages = (function() {
 
 			let getCountryCode = lang => lang += '_' + lang.toUpperCase();
 			let userLang = getCountryCode((this.getUserLanguage()).replace(/\-.+/, ""));
-      if (this._list.indexOf(userLang) == -1) {
+			if (this._list.indexOf(userLang) == -1) {
 				this.current = this._list[0];
 			}
 			else {
@@ -132,7 +132,7 @@ var Languages = (function() {
 			}
 
 			if (path) {
-				_path =  path + this.current + ".json";
+				_path = path + this.current + ".json";
 			}
 
 			let _callback = (txt, id, notCall) => {
@@ -166,24 +166,24 @@ var Languages = (function() {
 			}
 
 			if (fs) {
-          if (!callback) {
-							for (let lang of this._list) {
-              	_callback(fs.readFileSync(path + lang + ".json"), lang, true);
+				if (!callback) {
+					for (let lang of this._list) {
+						_callback(fs.readFileSync(path + lang + ".json"), lang, true);
+					}
+				}
+				else {
+					let index = 0;
+					for (let lang of this._list) {
+						fs.readFile(path + lang + ".json", (err, ret) => {
+							if (err) throw err;
+							_callback(ret, lang, true);
+							index++;
+							if (callback && index == this._list.length) {
+								callback.call(this);
 							}
-          }
-          else {
-							let index=0;
-							for (let lang of this._list) {
-								fs.readFile(path + lang + ".json",  (err, ret) => {
-                    if (err) throw err;
-                    _callback(ret, lang, true);
-										index++;
-										if (callback && index == this._list.length) {
-											callback.call(this);
-										}
-                })
-							}
-          }
+						})
+					}
+				}
 				return this;
 			}
 
@@ -194,16 +194,16 @@ var Languages = (function() {
 				xhr = false;
 			}
 
-			xhr.onreadystatechange  = () => {
-				 if (xhr.readyState  == 4 && xhr.status  == 200)  {
-						_callback(xhr.responseText);
-				 }
+			xhr.onreadystatechange = () => {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					_callback(xhr.responseText);
+				}
 			};
 
-		  xhr.open("GET", _path,  true);
-		  xhr.send();
+			xhr.open("GET", _path, true);
+			xhr.send();
 
-		  return this;
+			return this;
 		}
 
 		getUserLanguage() {
@@ -216,36 +216,34 @@ var Languages = (function() {
 		}
 
 		_initMultiple(obj) {
-			let ids, regex = /\[(.+)\]/,
-					specialId,
-					isGroup,
-					group = /^\$[^ ]+$/,
-					special = /\$[^ ]+/g,
-					tmpObj = {}, finalObj = {};
+			let ids,
+				specialId,
+				isGroup,
+				tmpObj = {}, finalObj = {};
 
 			function replaceManyGroup(specialId, obj, key, originalObj) {
 
-					let tmp = {};
-					let groupObj = originalObj ? originalObj[specialId] : obj[specialId];
-					let words = key.split(' ')
+				let tmp = {};
+				let groupObj = originalObj ? originalObj[specialId] : obj[specialId];
+				let words = key.split(' ')
 
-					for (let specialKey in groupObj) {
-						let id = key.replace(specialId, specialKey);
-						if (obj[key].text) {
-							tmp[id] = {
-								text: obj[key].text,
-								replacePattern: obj[key].replacePattern.map(w => specialId == w ? specialKey : w)
-							}
+				for (let specialKey in groupObj) {
+					let id = key.replace(specialId, specialKey);
+					if (obj[key].text) {
+						tmp[id] = {
+							text: obj[key].text,
+							replacePattern: obj[key].replacePattern.map(w => specialId == w ? specialKey : w)
 						}
-						else {
-							tmp[id] = {
-								text: obj[key],
-								replacePattern: words.map(w => specialId == w ? specialKey : w)
-							};
-						}
-
 					}
-					return tmp;
+					else {
+						tmp[id] = {
+							text: obj[key],
+							replacePattern: words.map(w => specialId == w ? specialKey : w)
+						};
+					}
+
+				}
+				return tmp;
 			}
 
 			function mergeWithOriginal(obj, finalObj) {
@@ -255,14 +253,21 @@ var Languages = (function() {
 				return obj;
 			}
 
-			for (let key in obj) {
-				isGroup = group.test(key);
+			const newObj = JSON.parse(JSON.stringify(obj))
+
+			for (let key in newObj) {
+				
+				let isGroup = /^\$[^ ]+$/.test(key);
+				let regex = /\[(.+)\]/
+				let special = /\$[^ ]+/g
+
 				if (regex.test(key)) {
 					ids = regex.exec(key)[1].split(',');
 					for (let id of ids) {
 						obj[key.replace(regex, id)] = obj[key];
 					}
 				}
+
 				if (special.test(key) && !isGroup) {
 					tmpObj = {};
 					finalObj = {};
@@ -284,6 +289,7 @@ var Languages = (function() {
 					}
 				}
 			}
+
 			return obj;
 		}
 
@@ -297,25 +303,25 @@ var Languages = (function() {
 		}
 
 		capitalizeFirstLetter(str) {
-	    return str.charAt(0).toUpperCase() + str.slice(1);
+			return str.charAt(0).toUpperCase() + str.slice(1);
 		}
 
 		replaceWorlds(str, id, namespace) {
-				let params = {}
-				if (!str) {
-					return str;
-				}
-				if (str.text) {
-					params = str;
-					str = str.text;
-				}
-				return str.replace(/\{([0-9]+)\}/g, (match, number) => {
-						let ids = params.replacePattern || id.split(' ');
-						return this.get(ids[number-1], namespace);
-				});
+			let params = {}
+			if (!str) {
+				return str;
+			}
+			if (str.text) {
+				params = str;
+				str = str.text;
+			}
+			return str.replace(/\{([0-9]+)\}/g, (match, number) => {
+				let ids = params.replacePattern || id.split(' ');
+				return this.get(ids[number - 1], namespace);
+			});
 		}
 
-		getGroup(name, namespace='self') {
+		getGroup(name, namespace = 'self') {
 			let groups = this.data[this.current][namespace]['$' + name];
 			let array = [];
 			for (let key in groups) {
@@ -324,7 +330,7 @@ var Languages = (function() {
 			return array;
 		}
 
-		render(text, {patternStart='{{', patternEnd='}}', pipe='|', fnStart='', fnEnd='', paramsSeparator=':'}={}, language) {
+		render(text, { patternStart = '{{', patternEnd = '}}', pipe = '|', fnStart = '', fnEnd = '', paramsSeparator = ':' } = {}, language) {
 			const escape = pattern => pattern.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")
 			patternStart = escape(patternStart)
 			patternEnd = escape(patternEnd)
@@ -376,8 +382,8 @@ var Languages = (function() {
 			if (!plurial) {
 				plurial = ["s"];
 			}
-			if (val > 2 && plurial[val-1]) {
-				return plurial[val-1];
+			if (val > 2 && plurial[val - 1]) {
+				return plurial[val - 1];
 			}
 			else if (val > 1) {
 				return plurial[0];
@@ -387,151 +393,151 @@ var Languages = (function() {
 			}
 		}
 
-    format(word, namespace, localCurrent, ...args) {
-        let i=-1, plurial, val;
-        let match = word.match(/%[sdp]/g);
-        if (!match) return word;
-        for (let m of match) {
-            i++;
-            if (m == "%d") {
-                plurial = args[i];
-            }
-            else if (m == "%p") {
-                break;
-            }
-        }
-        i = -1;
-        return word.replace(/%[sdp]([0-9]+)?/g, (match, number) => {
-          i++;
-          val = typeof args[i] != 'undefined' ? args[i] : match;
-          if (/^%p/.test(match)) {
-             if (plurial == undefined) {
-                plurial = val;
-             }
-						 if (typeof plurial != "number") {
-							  plurial = 0;
-						 }
-             val = this.getPlurial(plurial, match.replace("%", ""), namespace, localCurrent);
-          }
-          return val;
-        });
-	    }
-	  	get load() {
-				let self = this
-				return {
-		        Handlebars(Handlebars) {
-
-		            Handlebars.registerHelper('t', function(text, options) {
-		                 var nb = options.hash.nb,
-		                     _if = options.hash.if;
-		                 if (nb === undefined) {
-		                      return text.t();
-		                 }
-		                 else {
-		                     if (_if === undefined) {
-		                         return text.t(+nb);
-		                     }
-		                     else {
-		                         return text.t(_if, +nb);
-		                     }
-		                 }
-
-		            });
-
-		            return Handlebars;
-
-		        },
-						Pug(filters={}) {
-							filters.translate = text => self.render(text);
-							return filters
-						},
-		        Angular(angular) {
-		            angular .module("Languages", [])
-		                    .provider("Languages", function() {
-
-		                        this.init = self.init.bind(Languages);
-
-		                        this.$get = function() {
-		                            return self;
-		                        }
-
-		                    }).filter('t', function() {
-
-												  return function(str, ...expression) {
-												     return str.t(...expression);
-												  };
-
-												})
-		        },
-						get Vue() {
-							return {
-								install(Vue, options) {
-								  Vue.Languages = self
-									Vue.filter('t', (value, ...expression) => {
-									  return self.translate(value, ...expression);
-									})
-								}
-							} // return
-					 }
-				 } // second return
-	    }
-			translate(value, ...args) {
-				var type, txt, namespace = "self", localCurrent;
-
-				let arg = args[0]
-
-				function shift() {
-					arg = args.shift()[0];
+		format(word, namespace, localCurrent, ...args) {
+			let i = -1, plurial, val;
+			let match = word.match(/%[sdp]/g);
+			if (!match) return word;
+			for (let m of match) {
+				i++;
+				if (m == "%d") {
+					plurial = args[i];
 				}
-
-				if (this._list.indexOf(args[0]) != -1) {
-					localCurrent = arg;
-					shift()
+				else if (m == "%p") {
+					break;
 				}
-				if (typeof arg == "boolean") {
-					let group = value.match(/\((.*?)\)/);
-					if (group) {
-						type = group[1].split("|");
-						txt = arg ?
-									value.replace(group[0], type[0].trim()) :
-									value.replace(group[0], type[1].trim());
+			}
+			i = -1;
+			return word.replace(/%[sdp]([0-9]+)?/g, (match, number) => {
+				i++;
+				val = typeof args[i] != 'undefined' ? args[i] : match;
+				if (/^%p/.test(match)) {
+					if (plurial == undefined) {
+						plurial = val;
 					}
-					else {
-						type = value.split("|");
-						txt = arg ? type[0] : type[1];
+					if (typeof plurial != "number") {
+						plurial = 0;
 					}
-					shift()
+					val = this.getPlurial(plurial, match.replace("%", ""), namespace, localCurrent);
+				}
+				return val;
+			});
+		}
+		get load() {
+			let self = this
+			return {
+				Handlebars(Handlebars) {
+
+					Handlebars.registerHelper('t', function (text, options) {
+						var nb = options.hash.nb,
+							_if = options.hash.if;
+						if (nb === undefined) {
+							return text.t();
+						}
+						else {
+							if (_if === undefined) {
+								return text.t(+nb);
+							}
+							else {
+								return text.t(_if, +nb);
+							}
+						}
+
+					});
+
+					return Handlebars;
+
+				},
+				Pug(filters = {}) {
+					filters.translate = text => self.render(text);
+					return filters
+				},
+				Angular(angular) {
+					angular.module("Languages", [])
+						.provider("Languages", function () {
+
+							this.init = self.init.bind(Languages);
+
+							this.$get = function () {
+								return self;
+							}
+
+						}).filter('t', function () {
+
+							return function (str, ...expression) {
+								return str.t(...expression);
+							};
+
+						})
+				},
+				get Vue() {
+					return {
+						install(Vue, options) {
+							Vue.Languages = self
+							Vue.filter('t', (value, ...expression) => {
+								return self.translate(value, ...expression);
+							})
+						}
+					} // return
+				}
+			} // second return
+		}
+		translate(value, ...args) {
+			var type, txt, namespace = "self", localCurrent;
+
+			let arg = args[0]
+
+			function shift() {
+				arg = args.shift()[0];
+			}
+
+			if (this._list.indexOf(args[0]) != -1) {
+				localCurrent = arg;
+				shift()
+			}
+			if (typeof arg == "boolean") {
+				let group = value.match(/\((.*?)\)/);
+				if (group) {
+					type = group[1].split("|");
+					txt = arg ?
+						value.replace(group[0], type[0].trim()) :
+						value.replace(group[0], type[1].trim());
 				}
 				else {
-					txt = value;
+					type = value.split("|");
+					txt = arg ? type[0] : type[1];
 				}
-				let words = txt.split('+');
-				let str = '', word;
-				for (let w of words) {
-					let match, namespace;
-					if (match = /(.+)\.(.+)/.exec(w)) {
-						namespace = match[1];
-						w = match[2];
-					}
-					let word = this.get(w.trim(), namespace, localCurrent);
-					if (word) {
-						str += this.format(word, namespace, localCurrent, ...args);
-					}
-					str += ' ';
-				}
-				return this.capitalizeFirstLetter(str.trim());
+				shift()
 			}
+			else {
+				txt = value;
+			}
+			let words = txt.split('+');
+			let str = '', word;
+			for (let w of words) {
+				let match, namespace;
+				if (match = /(.+)\.(.+)/.exec(w)) {
+					namespace = match[1];
+					w = match[2];
+				}
+				let word = this.get(w.trim(), namespace, localCurrent);
+				if (word) {
+					str += this.format(word, namespace, localCurrent, ...args);
+				}
+				str += ' ';
+			}
+			return this.capitalizeFirstLetter(str.trim());
+		}
 	}
 
 	instance = new Languages();
 
-	String.prototype.t = function(...args) {
+	String.prototype.t = function (...args) {
 		return instance.translate(this, ...args)
 	}
 
-	if (typeof(Handlebars) !== "undefined") instance.load.Handlebars(Handlebars);
-	if (typeof(angular) !== "undefined")  instance.load.Angular(angular);
-	if (typeof(Vue) !== "undefined") Vue.use(instance.load.Vue);
+	if (typeof (Handlebars) !== "undefined") instance.load.Handlebars(Handlebars);
+	if (typeof (angular) !== "undefined") instance.load.Angular(angular);
+	if (typeof (Vue) !== "undefined") Vue.use(instance.load.Vue);
 
 	return instance;
 })();
