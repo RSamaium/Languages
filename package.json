@@ -1,11 +1,11 @@
 {
   "name": "languages-js",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "Translation system in Javascript with the JSON format.",
   "main": "src/languages.js",
   "scripts": {
     "test": "mocha --timeout 0 ./tests/*.spec.js",
-    "build": "webpack",
+    "build": "webpack && babel src/languages.js --out-file languages.es5.js",
     "docs": "gitbook build ./ ./website/docs",
     "deploy": "gh-pages -d website",
     "prepublish": "npm run build"
@@ -35,6 +35,7 @@
   "homepage": "https://github.com/RSamaium/Languages",
   "dependencies": {},
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.18.0",
