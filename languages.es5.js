@@ -315,10 +315,11 @@ var Languages = function () {
 		}, {
 			key: "getUserLanguage",
 			value: function getUserLanguage() {
+				var first = this._list[0];
 				if (isServerSide) {
-					return this.current;
+					return first;
 				} else {
-					return navigator.language || navigator.userLanguage || this.current;
+					return navigator.language || navigator.userLanguage || first;
 				}
 			}
 		}, {
