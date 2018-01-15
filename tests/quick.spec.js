@@ -24,7 +24,7 @@ describe('Open Languages JSON', function () {
 
     before(() => {
         Languages = Languages.instance();
-        Languages.packages({ en_EN }).default('en_EN')
+        Languages.packages({ en_EN })
     })
 
     it('Hello', () => {

@@ -54,25 +54,22 @@ var Languages = (function () {
 		}
 
 		packages(languages, options = {}) {
+			let ids = []
+
 			const namespace = options.namespace || "self";
 			if (!this._cache[namespace]) {
 				this._cache[namespace] = {};
 			}
 			for (let key in languages) {
 				this._cache[namespace][key] = languages[key];
-			}
-			return this;
-		}
-
-		default(id, options = {}) {
-			const namespace = options.namespace || "self"
-			let ids = []
-			ids.push(id)
-			for (let key in this._cache[namespace]) {
-				if (key == id) continue;
 				ids.push(key)
 			}
+
 			return this.init(ids, false, false, options)
+		}
+
+		default(id) {
+			this.current = id
 		}
 
 		// NodeJS only
@@ -112,10 +109,6 @@ var Languages = (function () {
 
 			this._path = path;
 
-			if (!this._cache[namespace]) {
-				this._cache[namespace] = {};
-			}
-
 			if (!(id instanceof Array)) {
 				id = [id];
 			}
@@ -151,6 +144,10 @@ var Languages = (function () {
 					json = txt;
 				}
 
+				if (!this._cache[namespace]) {
+					this._cache[namespace] = {};
+				}
+
 				let [data, options] = json;
 				this.data[id] = {};
 				this.options[id] = {};
@@ -158,10 +155,12 @@ var Languages = (function () {
 				this.options[id][namespace] = options;
 				this._cache[namespace][id] = txt;
 				if (callback && !notCall) callback.call(self);
-			}
+			}	
 
-			if (this._cache[namespace][this.current]) {
-				_callback(this._cache[namespace][this.current]);
+			if (this._cache[namespace]) {
+				for (let lang in this._cache[namespace]) {
+					_callback(this._cache[namespace][lang], lang);
+				}
 				return this;
 			}
 
@@ -488,7 +487,8 @@ var Languages = (function () {
 			let arg = args[0]
 
 			function shift() {
-				arg = args.shift()[0];
+				args.shift();
+				arg = args[0]
 			}
 
 			if (this._list.indexOf(args[0]) != -1) {
