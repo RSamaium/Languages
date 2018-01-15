@@ -74,28 +74,23 @@ var Languages = function () {
 			value: function packages(languages) {
 				var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
+				var ids = [];
+
 				var namespace = options.namespace || "self";
 				if (!this._cache[namespace]) {
 					this._cache[namespace] = {};
 				}
 				for (var key in languages) {
 					this._cache[namespace][key] = languages[key];
+					ids.push(key);
 				}
-				return this;
+
+				return this.init(ids, false, false, options);
 			}
 		}, {
 			key: "default",
 			value: function _default(id) {
-				var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-				var namespace = options.namespace || "self";
-				var ids = [];
-				ids.push(id);
-				for (var key in this._cache[namespace]) {
-					if (key == id) continue;
-					ids.push(key);
-				}
-				return this.init(ids, false, false, options);
+				this.current = id;
 			}
 
 			// NodeJS only
@@ -169,10 +164,6 @@ var Languages = function () {
 
 				this._path = path;
 
-				if (!this._cache[namespace]) {
-					this._cache[namespace] = {};
-				}
-
 				if (!(id instanceof Array)) {
 					id = [id];
 				}
@@ -208,6 +199,10 @@ var Languages = function () {
 						json = txt;
 					}
 
+					if (!_this2._cache[namespace]) {
+						_this2._cache[namespace] = {};
+					}
+
 					var _json = json,
 					    _json2 = _slicedToArray(_json, 2),
 					    data = _json2[0],
@@ -221,8 +216,10 @@ var Languages = function () {
 					if (callback && !notCall) callback.call(self);
 				};
 
-				if (this._cache[namespace][this.current]) {
-					_callback(this._cache[namespace][this.current]);
+				if (this._cache[namespace]) {
+					for (var lang in this._cache[namespace]) {
+						_callback(this._cache[namespace][lang], lang);
+					}
 					return this;
 				}
 
@@ -234,9 +231,9 @@ var Languages = function () {
 
 						try {
 							for (var _iterator2 = this._list[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-								var lang = _step2.value;
+								var _lang = _step2.value;
 
-								_callback(fs.readFileSync(path + lang + ".json"), lang, true);
+								_callback(fs.readFileSync(path + _lang + ".json"), _lang, true);
 							}
 						} catch (err) {
 							_didIteratorError2 = true;
@@ -628,7 +625,8 @@ var Languages = function () {
 				var arg = args[0];
 
 				function shift() {
-					arg = args.shift()[0];
+					args.shift();
+					arg = args[0];
 				}
 
 				if (this._list.indexOf(args[0]) != -1) {
@@ -694,7 +692,7 @@ var Languages = function () {
 				var self = this;
 				return {
 					Handlebars: function (_Handlebars) {
-						function Handlebars(_x7) {
+						function Handlebars(_x6) {
 							return _Handlebars.apply(this, arguments);
 						}
 
