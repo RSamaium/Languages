@@ -484,6 +484,8 @@ var Languages = (function () {
 		translate(value, ...args) {
 			var type, txt, namespace = "self", localCurrent;
 
+			if (value === null || typeof value === 'undefined') return ''
+
 			let arg = args[0]
 
 			function shift() {

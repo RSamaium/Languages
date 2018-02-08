@@ -622,6 +622,8 @@ var Languages = function () {
 				    namespace = "self",
 				    localCurrent;
 
+				if (value === null || typeof value === 'undefined') return '';
+
 				var arg = args[0];
 
 				function shift() {

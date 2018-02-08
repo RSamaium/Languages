@@ -13,6 +13,16 @@ describe('Test Language', function() {
     expect('hello'.t()).to.equal('Hello');
   })
 
+  it('Value is null', () => {
+    const val = Languages.translate(null)
+    expect(val).to.equal('');
+  })
+
+  it('Value is undefined', () => {
+    const val = Languages.translate(undefined)
+    expect(val).to.equal('');
+  })
+
   it('Connect', () => {
     expect('connect'.t()).to.equal('To connect');
     expect('connect help'.t()).to.equal('Connect help');
