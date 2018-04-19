@@ -430,6 +430,9 @@ var Languages = function () {
 			value: function get(id, namespace, lang) {
 				lang = lang || this.current;
 				namespace = namespace || 'self';
+				if (!this.data[lang]) {
+					return '';
+				}
 				if (!this.data[lang][namespace]) {
 					return '';
 				}

@@ -1,6 +1,6 @@
 {
   "name": "languages-js",
-  "version": "2.2.7",
+  "version": "2.2.8",
   "description": "Translation system in Javascript with the JSON format.",
   "main": "src/languages.js",
   "scripts": {
