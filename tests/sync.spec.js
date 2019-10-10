@@ -14,8 +14,8 @@ describe('Test Sync Language', function() {
   }
 
   before(() => {
-      Languages = Languages.instance();
-      Languages.init(['en_EN', 'fr_FR'], `${__dirname}/../langs/`);
+      const instance = Languages.instance();
+      instance.init(['en_EN', 'fr_FR'], `${__dirname}/../langs/`);
   })
 
   its()
@@ -23,8 +23,8 @@ describe('Test Sync Language', function() {
   describe('Test async All Language', function() {
 
     before(done => {
-        Languages = Languages.instance();
-        Languages.all(`${__dirname}/../langs/`, done);
+      const instance = Languages.instance();
+      instance.all(`${__dirname}/../langs/`, done);
     })
 
     its()
@@ -34,8 +34,8 @@ describe('Test Sync Language', function() {
   describe('Test Sync All Language', function() {
 
     before(() => {
-        Languages = Languages.instance();
-        Languages.all(`${__dirname}/../langs/`);
+      const instance = Languages.instance();
+      instance.all(`${__dirname}/../langs/`);
     })
 
     its()

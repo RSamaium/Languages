@@ -5,6 +5,7 @@
   "main": "src/languages.js",
   "scripts": {
     "test": "mocha --timeout 0 ./tests/*.spec.js",
+    "dev": "webpack && cp languages.min.js website/dist/languages.min.js",
     "build": "webpack && babel src/languages.js --out-file languages.es5.js",
     "docs": "gitbook build ./ ./website/docs",
     "deploy": "gh-pages -d website",
@@ -43,5 +44,8 @@
     "gh-pages": "^0.12.0",
     "pug": "^2.0.0-beta6",
     "webpack": "^1.14.0"
+  },
+  "browser": {
+    "fs": false
   }
 }
