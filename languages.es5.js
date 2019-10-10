@@ -26,7 +26,7 @@ var LanguagesClass = require('./languages.class');
 
 var Languages = function () {
 
-	instance = new LanguagesClass();
+	var instance = new LanguagesClass();
 
 	instance.instance = function () {
 		return instance = new LanguagesClass();

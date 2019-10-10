@@ -252,6 +252,14 @@ module.exports = class Languages {
                 }
             }
             if (isGroup) {
+                if (obj[key] instanceof Array) {
+                    let buffer = {}
+                    let name = key.replace(/^\$/, '')
+                    for (let i=0 ; i < obj[key].length ; i++) {
+                        buffer[name + '_' + i] = obj[key][i]
+                    }
+                    obj[key] = buffer
+                }
                 for (let groupKey in obj[key]) {
                     obj[groupKey] = obj[key][groupKey];
                 }
